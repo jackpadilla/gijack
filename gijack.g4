@@ -1,17 +1,17 @@
 grammar gijack;
 
-start: programa EOF;
+start: programa EOF; 
 
 programa: TK_PROGRAM ID DELIMITER CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
-procesos: proceso+;
+procesos: proceso+; 
 
 proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | variable ) ;
 
 lista: expresion (COMMA expresion)* ;
 
-asignacion: simple_id ASSIGN_OP expresion DELIMITER;
-
+asignacion: simple_id ASSIGN_OP expresion DELIMITER; 
+ 
 forLoop: TK_FOR PAREN_LEFT (asignacion | variable) expresion DELIMITER expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
 whileLoop: TK_WHILE  PAREN_LEFT expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
@@ -71,8 +71,8 @@ func_call: simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER ;
 call_arg: (expresion (COMMA expresion )*)? ;
 
 simple_id
-  : ID
-  | ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT
+  : ID {self.tabla.agregar_id($1)}
+  | ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.tabla.agregar_id($1)}
   ;
 
 // ---
