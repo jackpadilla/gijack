@@ -36,7 +36,7 @@ variable
 imprimir
   : TK_PRINT PAREN_LEFT expresion (COMMA expresion)* PAREN_RIGHT DELIMITER ;
 
-tipo: ('bool' | 'char' | 'string' | 'int' | 'float' );
+tipo: varTipo=('bool' | 'char' | 'string' | 'int' | 'float' ){self.tabla.agregar_tipo($varTipo.text)};
 
 argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 

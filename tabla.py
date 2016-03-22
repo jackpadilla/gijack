@@ -3,6 +3,7 @@ class Tabla():
         self.variables = {}
         self.funciones = {}
         self.ids= []
+        self.tipos= []
 
     def agregar_variable(self, variable, tipo):
         if variable in self.variables.keys():
@@ -22,6 +23,10 @@ class Tabla():
     def agregar_id(self, id):
         self.ids.append(id)
 
+    def agregar_tipo(self,tipo):
+        self.tipos.append(tipo)
+
     def print_vars(self):
         for id in self.ids:
             print id
+            print tipo
