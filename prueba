@@ -1,0 +1,21 @@
+program meep;
+{ 
+	
+	
+	int x=1;
+	int x=2+2;
+	string y="papalord";
+	int list[1,2,3,4];
+	for(int i=0;i<10;i+1)
+	{
+	if(x==4)
+	{
+
+	y=x;
+
+	}
+
+
+	}
+	
+}
