@@ -8,7 +8,7 @@ procesos: proceso+;
 
 proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | variable ) ;
 
-lista: const (COMMA const)* ;
+lista: expresion (COMMA expresion)* ;
 
 asignacion: simple_id ASSIGN_OP expresion DELIMITER;
 
@@ -54,7 +54,7 @@ add_op: ( '+' | '-');
 
 neg_op: ('not' | '!');
 
-expresion: exp (rel_op exp)? ;
+expresion: exp (rel_op exp)* ;
 
 exp: e ( comp_op e)? ;
 
