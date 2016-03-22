@@ -29,7 +29,7 @@ elseCond: TK_ELSE CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 elseifCond: TK_ELSE ifCond ;
 
 variable
-  : tipo simple_id DELIMITER
+  : tipo simple_id DELIMITER {self.tabla.agregar_variable()}
   | tipo simple_id ASSIGN_OP expresion DELIMITER
   ;
 

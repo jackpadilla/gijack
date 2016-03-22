@@ -1,6 +1,7 @@
 program meep;
 { 
-	
+	int x;
+	int y;
 	
 	int x=1;
 	int x=2+2;

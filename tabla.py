@@ -5,13 +5,16 @@ class Tabla():
         self.ids= []
         self.tipos= []
 
-    def agregar_variable(self, variable, tipo):
+    def agregar_variable(self):
+        print "meep"
+        variable=self.ids[-1]
+        tipo=self.tipos[-1]
         if variable in self.variables.keys():
             raise Error('Variable ya existe')
 
-        variables[variable] = {
+        self.variables[variable] = {
             'tipo': tipo,
-            'id': len(variables.keys())
+            'id': len(self.variables.keys())
         }
 
     def variable_existe(self, variable):
@@ -23,10 +26,10 @@ class Tabla():
     def agregar_id(self, id):
         self.ids.append(id)
 
-    def agregar_tipo(self,tipo):
+    def agregar_tipo(self, tipo):
         self.tipos.append(tipo)
 
     def print_vars(self):
-        for id in self.ids:
-            print id
-            print tipo
+        for nombre,var in self.variables.items():
+            print nombre,var["tipo"]
+        
