@@ -11,7 +11,12 @@ def main(argv):
     lexer = gijackLexer(inputfile)
     stream = CommonTokenStream(lexer)
     parser = Funk(stream, tabla)
-    tree = parser.start()
+
+    try:
+    	tree = parser.start()	
+    except Exception as e:
+    	print 'Hubo un error: ' + str(e)
+
     tabla.print_vars()
  
 if __name__ == '__main__':

@@ -2,15 +2,10 @@ class Tabla():
     def __init__(self):
         self.variables = {}
         self.funciones = {}
-        self.ids= []
-        self.tipos= []
-
-    def agregar_variable(self):
-        print "meep"
-        variable=self.ids[-1]
-        tipo=self.tipos[-1]
+        
+    def agregar_variable(self, variable, tipo):
         if variable in self.variables.keys():
-            raise Error('Variable ya existe')
+            raise Exception('Variable ya existe: ' + variable)
 
         self.variables[variable] = {
             'tipo': tipo,
@@ -21,13 +16,7 @@ class Tabla():
         try:
             return self.variables[variable]
         except KeyError:
-            raise Error('Variable no declarada')
-
-    def agregar_id(self, id):
-        self.ids.append(id)
-
-    def agregar_tipo(self, tipo):
-        self.tipos.append(tipo)
+            raise Exception('Variable no declarada')
 
     def print_vars(self):
         for nombre,var in self.variables.items():
