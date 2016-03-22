@@ -2,7 +2,7 @@ grammar gijack;
 
 start: programa EOF; 
 
-programa: TK_PROGRAM ID DELIMITER CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+programa: TK_PROGRAM ID DELIMITER funcion* CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
 procesos: proceso+; 
 
@@ -30,7 +30,7 @@ elseifCond: TK_ELSE ifCond ;
 
 variable
   : tipo simple_id DELIMITER {self.tabla.agregar_variable()}
-  | tipo simple_id ASSIGN_OP expresion DELIMITER
+  | tipo simple_id ASSIGN_OP expresion DELIMITER 
   ;
 
 imprimir
