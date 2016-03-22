@@ -70,9 +70,9 @@ func_call: simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER ;
 
 call_arg: (expresion (COMMA expresion )*)? ;
 
-simple_id
-  : ID {self.tabla.agregar_id($1)}
-  | ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.tabla.agregar_id($1)}
+simple_id 
+  : varId=ID {self.tabla.agregar_id($varId.text)}
+  | varId=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.tabla.agregar_id($varId.text)}
   ;
 
 // ---
