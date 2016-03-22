@@ -10,7 +10,7 @@ proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | var
 
 lista: expresion (COMMA expresion)* ;
 
-asignacion: simple_id ASSIGN_OP expresion DELIMITER; 
+asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.variable_existe($varId.text)}; 
  
 forLoop: TK_FOR PAREN_LEFT (asignacion | variable) expresion DELIMITER expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
@@ -41,7 +41,7 @@ tipo returns [String varTipo]
 
 argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 
-funcion: TK_FUNC tipo? ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT ;
+funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion($varId.text, $varTipo.text)};
 
 const:  (INT | FLOAT | CHAR | STRING | BOOL);
 
@@ -67,9 +67,9 @@ fact: neg_op? ( PAREN_LEFT expresion PAREN_RIGHT | const | simple_id) ;
 
 lectura: TK_READ PAREN_LEFT simple_id (COMMA simple_id)* PAREN_RIGHT DELIMITER ;
 
-func_call: simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER ;
+func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla.funcion_existe($varId.text)} ;
 
-call_arg: (expresion (COMMA expresion )*)? ;listlist[1,2,3,4][1,2,3,4]
+call_arg: (expresion (COMMA expresion )*)? ;
 
 simple_id returns [String varId]
   : var=ID {$varId=$var.text}
