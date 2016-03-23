@@ -19,6 +19,7 @@ def main(argv):
 
     tabla.print_vars()
     tabla.print_funcion()
+    tabla.print_constante()
  
 if __name__ == '__main__':
     main(sys.argv)

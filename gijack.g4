@@ -43,7 +43,13 @@ argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 
 funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion($varId.text, $varTipo.text)};
 
-const:  (INT | FLOAT | CHAR | STRING | BOOL);
+const:  
+  ( varId=INT {self.tabla.agregar_constante($varId.text, "int")}
+  | varId=FLOAT {self.tabla.agregar_constante($varId.text, "float")}
+  | varId=CHAR {self.tabla.agregar_constante($varId.text, "char")}
+  | varId=STRING {self.tabla.agregar_constante($varId.text, "String")}
+  | varId=BOOL {self.tabla.agregar_constante($varId.text, "bool")}
+  );
 
 comp_op: ( '>' | '<' | '>=' | '<=' | '==' | '!=');
 
@@ -72,8 +78,8 @@ func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla
 call_arg: (expresion (COMMA expresion )*)? ;
 
 simple_id returns [String varId]
-  : var=ID {$varId=$var.text}
-  | var=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {$varId=$var.text}
+  : ID 
+  | ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT 
   ;
 
 // ---
