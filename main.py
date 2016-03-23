@@ -18,6 +18,7 @@ def main(argv):
     	print 'Hubo un error: ' + str(e)
 
     tabla.print_vars()
+    tabla.print_funcion()
  
 if __name__ == '__main__':
     main(sys.argv)

@@ -4,17 +4,20 @@ funcion int callMeBeepMe(string mensaje, float hora)
 	print (mensaje + "at " + hora);
 }
 
+<<<<<<< HEAD
 funcion string callMeBeepMe()
 {
 	print ("hola")
 }
+=======
+>>>>>>> 13e9e0548077f0d612afb560c49eb26e88cdd75b
 { 
 	print("fuck you", 4.00);
 	int x=1;
 
 	int j=2+2;
 	string y="papalord";
-	int list[1,2,3,4];
+	int list [1,2,3,4];
 	for(int i=0;i<10;i+1)
 	{
 	if(x==4)

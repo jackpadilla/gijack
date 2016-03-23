@@ -36,3 +36,6 @@ class Tabla():
         except KeyError:
             raise Exception('Funcion no declarada')
 
+    def print_funcion(self):
+        for nombre,var in self.funciones.items():
+            print nombre,var["tipo"]
