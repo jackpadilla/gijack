@@ -4,13 +4,6 @@ funcion int callMeBeepMe(string mensaje, float hora)
 	print (mensaje + "at " + hora);
 }
 
-<<<<<<< HEAD
-funcion string callMeBeepMe()
-{
-	print ("hola")
-}
-=======
->>>>>>> 13e9e0548077f0d612afb560c49eb26e88cdd75b
 { 
 	print("fuck you", 4.00);
 	int x=1;

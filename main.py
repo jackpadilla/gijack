@@ -13,9 +13,9 @@ def main(argv):
     parser = Funk(stream, tabla)
 
     try:
-    	tree = parser.start()	
+        tree = parser.start()   
     except Exception as e:
-    	print 'Hubo un error: ' + str(e)
+        print 'Hubo un error: ' + str(e)
 
     tabla.print_vars()
     tabla.print_funcion()
