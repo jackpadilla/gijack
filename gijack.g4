@@ -2,7 +2,7 @@ grammar gijack;
 
 start: programa EOF; 
 
-programa: TK_PROGRAM ID DELIMITER funcion* CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+programa: TK_PROGRAM ID DELIMITER funcion* 'main' CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
 procesos: proceso+; 
 

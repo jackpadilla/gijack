@@ -3,7 +3,7 @@ funcion int callMeBeepMe(string mensaje, float hora)
 {
 	print (mensaje + "at " + hora);
 }
-
+main
 { 
 	print("fuck you", 4.00);
 	int x=1;
