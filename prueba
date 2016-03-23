@@ -3,9 +3,15 @@ funcion int callMeBeepMe(string mensaje, float hora)
 {
 	print (mensaje + "at " + hora);
 }
+
+funcion string callMeBeepMe()
+{
+	print ("hola")
+}
 { 
 	print("fuck you", 4.00);
 	int x=1;
+
 	int j=2+2;
 	string y="papalord";
 	int list[1,2,3,4];
