@@ -2,7 +2,7 @@ grammar gijack;
 
 start: programa EOF; 
 
-programa: TK_PROGRAM ID DELIMITER funcion* 'main' CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+programa: TK_PROGRAM ID DELIMITER funcion* vartipo=tipo 'main' CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion("main", $vartipo.text)};
 
 procesos: proceso+; 
 
@@ -37,7 +37,7 @@ imprimir
   : TK_PRINT PAREN_LEFT expresion (COMMA expresion)* PAREN_RIGHT DELIMITER ;
 
 tipo returns [String varTipo]
-  : var=('bool' | 'char' | 'string' | 'int' | 'float' ) {$varTipo=$var.text};
+  : var=('bool'| 'string' | 'int' | 'float' ) {$varTipo=$var.text};
 
 argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 
@@ -46,7 +46,6 @@ funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_
 const:  
   ( varId=INT {self.tabla.agregar_constante($varId.text, "int")}
   | varId=FLOAT {self.tabla.agregar_constante($varId.text, "float")}
-  | varId=CHAR {self.tabla.agregar_constante($varId.text, "char")}
   | varId=STRING {self.tabla.agregar_constante($varId.text, "String")}
   | varId=BOOL {self.tabla.agregar_constante($varId.text, "bool")}
   );
@@ -120,9 +119,6 @@ FLOAT
 BOOL: ('TRUE' | 'FALSE');
 
 WS: (' '| '\t'| '\r'| '\n') -> skip;
-
-CHAR
-    : '"' ( ESC_SEQ | ~('\\'|'"') ) '"' ;
 
 STRING
     : '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;
