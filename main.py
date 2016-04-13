@@ -1,10 +1,12 @@
-import sys 
-from antlr4 import * 
-from funk import Funk
-from tabla import Tabla
-from gijackLexer import gijackLexer
-from gijackParser import gijackParser
- 
+#!/usr/bin/python
+
+import sys
+from parser.funk import Funk
+from parser.tabla import Tabla
+from parser.gijackLexer import gijackLexer
+from parser.gijackParser import gijackParser
+from antlr4 import *
+
 def main(argv):
     tabla = Tabla()
     inputfile = FileStream(argv[1])
@@ -13,13 +15,13 @@ def main(argv):
     parser = Funk(stream, tabla)
 
     try:
-        tree = parser.start()   
+        tree = parser.start()
     except Exception as e:
         print 'Hubo un error: ' + str(e)
 
     tabla.print_vars()
     tabla.print_funcion()
     tabla.print_constante()
- 
+
 if __name__ == '__main__':
     main(sys.argv)
