@@ -56,7 +56,7 @@ rel_op: ('and' | 'or' | '&&' | '||');
 
 mult_op: ('*' | '%' | '/' );
 
-add_op: ( '+' | '-');
+add_op: ( '+' | '-'){self.programa.};
 
 neg_op: ('not' | '!');
 
