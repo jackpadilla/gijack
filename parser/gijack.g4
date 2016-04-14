@@ -1,17 +1,17 @@
 grammar gijack;
 
-start: programa EOF; 
+start: programa EOF;
 
 programa: TK_PROGRAM ID DELIMITER funcion* vartipo=tipo 'main' CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion("main", $vartipo.text)};
 
-procesos: proceso+; 
+procesos: proceso+;
 
 proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | variable ) ;
 
 lista: expresion (COMMA expresion)* ;
 
-asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.variable_existe($varId.text)}; 
- 
+asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.variable_existe($varId.text)};
+
 forLoop: TK_FOR PAREN_LEFT (asignacion | variable) expresion DELIMITER expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
 whileLoop: TK_WHILE  PAREN_LEFT expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
@@ -43,7 +43,7 @@ argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 
 funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion($varId.text, $varTipo.text)};
 
-const:  
+const:
   ( varId=INT {self.tabla.agregar_constante($varId.text, "int")}
   | varId=FLOAT {self.tabla.agregar_constante($varId.text, "float")}
   | varId=STRING {self.tabla.agregar_constante($varId.text, "String")}
@@ -56,7 +56,8 @@ rel_op: ('and' | 'or' | '&&' | '||');
 
 mult_op: ('*' | '%' | '/' );
 
-add_op: ( '+' | '-'){self.programa.};
+add_op returns [String op]
+  : var=('+' | '-') { $op=$var.text };
 
 neg_op: ('not' | '!');
 
@@ -64,7 +65,7 @@ expresion: exp (rel_op exp)* ;
 
 exp: e ( comp_op e)? ;
 
-e: term (add_op term)*;
+e: term (op=add_op term)* { self.programa.aritmetica($op.text, 'meep', 'meep') };
 
 term: fact (mult_op fact)* ;
 
@@ -77,8 +78,8 @@ func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla
 call_arg: (expresion (COMMA expresion )*)? ;
 
 simple_id returns [String varId]
-  : ID 
-  | ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT 
+  : var=ID { $varId=$var.text }
+  | var=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT { $varId=$var.text }
   ;
 
 // ---

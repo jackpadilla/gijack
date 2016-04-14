@@ -1,4 +1,4 @@
-cubo = {
+CUBO = {
     "bool": {
         "bool": {
             "+": "invalid",
@@ -86,7 +86,6 @@ cubo = {
             "<=": "bool",
             ">=": "bool",
             "==": "bool"
-            # ...
         },
         "float": {
         	"+": "float",
@@ -147,7 +146,6 @@ cubo = {
             "<=": "bool",
             ">=": "bool",
             "==": "bool"
-            # ...
         },
         "float": {
         	"+": "float",
@@ -162,7 +160,6 @@ cubo = {
             "<=": "bool",
             ">=": "bool",
             "==": "bool"
-            # ...
         },
         "string": {
         	"+": "invalid",
@@ -177,7 +174,6 @@ cubo = {
             "<=": "invalid",
             ">=": "invalid",
             "==": "bool"
-            # ...
         }
     },
     "string": {
@@ -208,7 +204,6 @@ cubo = {
             "<=": "invalid",
             ">=": "invalid",
             "==": "bool"
-            # ...
         },
         "float": {
         	"+": "invalid",
@@ -223,7 +218,6 @@ cubo = {
             "<=": "invalid",
             ">=": "invalid",
             "==": "bool"
-            # ...
         },
         "string": {
         	"+": "string",
@@ -238,12 +232,6 @@ cubo = {
             "<=": "invalid",
             ">=": "invalid",
             "==": "bool"
-            # ...
         }
     },
 }
-
-def ValidOperation(tipo1, tipo2, op):
-	resultado = cubo[tipo1][tipo2][op]
-	return resultado
-
