@@ -8,13 +8,12 @@ from parser.gijackParser import gijackParser
 from antlr4 import *
 
 def main(argv):
-    prog = Programa("meep")
     tabla = Tabla()
+    programa1 = Programa(tabla, "meep")
     inputfile = FileStream(argv[1])
     lexer = gijackLexer(inputfile)
     stream = CommonTokenStream(lexer)
     parser = Funk(stream, tabla, programa1)
-    prog.dump()
 
     try:
         tree = parser.start()
@@ -24,6 +23,7 @@ def main(argv):
     tabla.print_vars()
     tabla.print_funcion()
     tabla.print_constante()
+    programa1.dump()
 
 if __name__ == '__main__':
     main(sys.argv)

@@ -3,7 +3,13 @@ class Tabla():
         self.variables = {}
         self.funciones = {}
         self.constantes = {}
-        
+    
+    def buscar_variable(self, nombre):
+        try:
+            return self.variables[nombre]
+        except KeyError:
+            raise Exception("ERROR: Variable %s no definida" % nombre)
+
     def agregar_variable(self, variable, tipo):
         if variable in self.variables.keys():
             raise Exception('Variable ya existe: ' + variable)

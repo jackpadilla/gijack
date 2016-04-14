@@ -1,21 +1,29 @@
-from semantic_cube import CUBE
+from semantic_cube import CUBO
 from cuadruplo import Cuadruplo
 
 class Programa:
-    def __init__(self, nombre):
+    def __init__(self, tabla, nombre):
+        self.tabla = tabla
         self.nombre = nombre
         self.estatutos = []
+        self.varIds = []
 
-    def aritmetica(self, operador, var1 ,var2):
+    def aritmetica(self, operador):
         # TODO valida que es una operacion valida utilizando la funcion que puse ahi abajo
         # TODO poner mas meeps por ahi
+        
+        id1 = self.varIds.pop()
+        id2 = self.varIds.pop()
 
-        cuad = Cuadruplo(operador,var1,var2,0)
+        var1 = self.tabla.buscar_variable(id1)
+        var2 = self.tabla.buscar_variable(id2)
+
+        cuad = Cuadruplo(operador,var1,var2,"0")
         self.estatutos.append(cuad)
 
     def valid_operation(tipo1, tipo2, op):
         try:
-            resultado = CUBE[tipo1][tipo2][op]
+            resultado = CUBO[tipo1][tipo2][op]
         except KeyError:
             resultado = "invalido"
 
@@ -29,3 +37,6 @@ class Programa:
     def dump(self):
         for estatuto in self.estatutos:
             print estatuto.toString()
+
+    def addVar(self, id):
+        self.varIds.append(id)

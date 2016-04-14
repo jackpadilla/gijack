@@ -4,7 +4,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "bool",
             "||": "bool",
@@ -18,7 +18,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -32,7 +32,7 @@ CUBO = {
         	"+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -47,7 +47,7 @@ CUBO = {
         	"+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -63,7 +63,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -77,7 +77,7 @@ CUBO = {
             "+": "int",
             "-": "int",
             "*": "int",
-            "/": "float"
+            "/": "float",
             "%": "float",
             "&&": "invalid",
             "||": "invalid",
@@ -91,7 +91,7 @@ CUBO = {
         	"+": "float",
             "-": "float",
             "*": "float",
-            "/": "float"
+            "/": "float",
             "%": "float",
             "&&": "invalid",
             "||": "invalid",
@@ -106,7 +106,7 @@ CUBO = {
         	"+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -123,7 +123,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -137,7 +137,7 @@ CUBO = {
             "+": "float",
             "-": "float",
             "*": "float",
-            "/": "float"
+            "/": "float",
             "%": "float",
             "&&": "invalid",
             "||": "invalid",
@@ -151,7 +151,7 @@ CUBO = {
         	"+": "float",
             "-": "float",
             "*": "float",
-            "/": "float"
+            "/": "float",
             "%": "float",
             "&&": "invalid",
             "||": "invalid",
@@ -165,7 +165,7 @@ CUBO = {
         	"+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -181,7 +181,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -195,7 +195,7 @@ CUBO = {
             "+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -209,7 +209,7 @@ CUBO = {
         	"+": "invalid",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",
@@ -223,7 +223,7 @@ CUBO = {
         	"+": "string",
             "-": "invalid",
             "*": "invalid",
-            "/": "invalid"
+            "/": "invalid",
             "%": "invalid",
             "&&": "invalid",
             "||": "invalid",

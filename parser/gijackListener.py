@@ -274,6 +274,15 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#f.
+    def enterF(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#f.
+    def exitF(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#lectura.
     def enterLectura(self, ctx):
         pass

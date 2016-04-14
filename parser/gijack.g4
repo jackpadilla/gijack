@@ -57,7 +57,7 @@ rel_op: ('and' | 'or' | '&&' | '||');
 mult_op: ('*' | '%' | '/' );
 
 add_op returns [String op]
-  : var=('+' | '-') { $op=$var.text };
+  : var=('+' | '-') {$op=$var.text};
 
 neg_op: ('not' | '!');
 
@@ -65,11 +65,16 @@ expresion: exp (rel_op exp)* ;
 
 exp: e ( comp_op e)? ;
 
-e: term (op=add_op term)* { self.programa.aritmetica($op.text, 'meep', 'meep') };
+e: term (op=add_op term)* {self.programa2.aritmetica($op.text)};
 
 term: fact (mult_op fact)* ;
 
-fact: neg_op? ( PAREN_LEFT expresion PAREN_RIGHT | const | simple_id) ;
+fact: neg_op? ( PAREN_LEFT expresion PAREN_RIGHT | f) ;
+
+f
+  : const 
+  | varId=simple_id {self.programa2.addVar($varId.text)}
+  ;
 
 lectura: TK_READ PAREN_LEFT simple_id (COMMA simple_id)* PAREN_RIGHT DELIMITER ;
 
@@ -78,8 +83,8 @@ func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla
 call_arg: (expresion (COMMA expresion )*)? ;
 
 simple_id returns [String varId]
-  : var=ID { $varId=$var.text }
-  | var=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT { $varId=$var.text }
+  : var=ID {$varId=$var.text}
+  | var=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {$varId=$var.text}
   ;
 
 // ---
