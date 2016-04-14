@@ -15,6 +15,7 @@ class Tabla():
             raise Exception('Variable ya existe: ' + variable)
 
         var = {
+            'nombre': variable, 
             'tipo': tipo,
             'id': len(self.variables.keys())
         }
@@ -54,3 +55,8 @@ class Tabla():
     def print_constante(self):
         for nombre,var in self.constantes.items():
             print nombre,var["tipo"]
+
+    def agregar_temporal(self, tipo):
+        nombre = "___tmp_%s_%d" % (tipo, len(self.variables.keys()))
+
+        return self.agregar_variable(nombre, tipo)

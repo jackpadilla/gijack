@@ -10,7 +10,7 @@ proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | var
 
 lista: expresion (COMMA expresion)* ;
 
-asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.variable_existe($varId.text)};
+asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)};
 
 forLoop: TK_FOR PAREN_LEFT (asignacion | variable) expresion DELIMITER expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
@@ -50,30 +50,49 @@ const:
   | varId=BOOL {self.tabla.agregar_constante($varId.text, "bool")}
   );
 
-comp_op: ( '>' | '<' | '>=' | '<=' | '==' | '!=');
+comp_op returns [String op]
+: var=( '>' | '<' | '>=' | '<=' | '==' | '!=') {$op=$var.text};
 
-rel_op: ('and' | 'or' | '&&' | '||');
+rel_op returns [String op]
+: var=('and' | 'or' | '&&' | '||') {$op=$var.text};
 
-mult_op: ('*' | '%' | '/' );
+mult_op returns [String op]
+: var=('*' | '%' | '/' ) {$op=$var.text}; 
 
 add_op returns [String op]
   : var=('+' | '-') {$op=$var.text};
 
-neg_op: ('not' | '!');
+neg_op returns [String op]
+: var=('not' | '!') {$op=$var.text};
 
-expresion: exp (rel_op exp)* ;
+expresion
+  : exp 
+  | op=rel_op expresion {self.programa2.aritmetica($op.text)}
+  ;
 
-exp: e ( comp_op e)? ;
+exp
+  : e 
+  | e op=comp_op e {self.programa2.aritmetica($op.text)}
+  ;
 
-e: term (op=add_op term)* {self.programa2.aritmetica($op.text)};
+e
+  : term 
+  | term op=add_op e {self.programa2.aritmetica($op.text)}
+  ;
 
-term: fact (mult_op fact)* ;
+term
+  : fact 
+  | fact op=mult_op term {self.programa2.aritmetica($op.text)}
+  ;
 
-fact: neg_op? ( PAREN_LEFT expresion PAREN_RIGHT | f) ;
+fact
+  : ( PAREN_LEFT expresion PAREN_RIGHT | f) 
+  | neg_op ( PAREN_LEFT expresion PAREN_RIGHT | f) {self.programa2.negacion()}
+  ;
 
 f
   : const 
-  | varId=simple_id {self.programa2.addVar($varId.text)}
+  | varId=simple_id {self.programa2.add_var($varId.text)}
   ;
 
 lectura: TK_READ PAREN_LEFT simple_id (COMMA simple_id)* PAREN_RIGHT DELIMITER ;

@@ -20,9 +20,9 @@ def main(argv):
     except Exception as e:
         print 'Hubo un error: ' + str(e)
 
-    tabla.print_vars()
-    tabla.print_funcion()
-    tabla.print_constante()
+    #tabla.print_vars()
+    #tabla.print_funcion()
+    #tabla.print_constante()
     programa1.dump()
 
 if __name__ == '__main__':

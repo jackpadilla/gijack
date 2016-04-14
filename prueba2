@@ -3,6 +3,10 @@ int main
 { 
 	int x;
 	int y;
-	int z=x+y;
-	x=z-y;
+	int z;
+	z=x*y+x-z;
+	y=x+z;
+	bool no;
+	no=!no;
+
 }

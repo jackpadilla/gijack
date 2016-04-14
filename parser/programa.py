@@ -9,8 +9,7 @@ class Programa:
         self.varIds = []
 
     def aritmetica(self, operador):
-        # TODO valida que es una operacion valida utilizando la funcion que puse ahi abajo
-        # TODO poner mas meeps por ahi
+   
 
         id1 = self.varIds.pop()
         id2 = self.varIds.pop()
@@ -18,13 +17,44 @@ class Programa:
         var1 = self.tabla.buscar_variable(id1)
         var2 = self.tabla.buscar_variable(id2)
 
-        tipo = operacion(var1['tipo'], var2['tipo'], operador)
-        temporal = tabla.agregar_variable("meep", tipo)
+        tipo = self.operacion(var1['tipo'], var2['tipo'], operador)
+        temporal = self.tabla.agregar_temporal(tipo)
+        self.varIds.append(temporal['nombre'])
 
-        cuad = Cuadruplo(operador,var1['id'],var2['id'],temporal['id'])
+        cuad = Cuadruplo(operador,var1['nombre'],var2['nombre'],temporal['nombre'])
         self.estatutos.append(cuad)
 
-    def operacion(tipo1, tipo2, op):
+    def asignacion(self, variable):
+        otroId = self.varIds.pop()
+
+        var1 = self.tabla.buscar_variable(variable)
+        var2 = self.tabla.buscar_variable(otroId)
+
+        if var1["tipo"] != var2["tipo"]:
+            raise Exception("ERROR: %s %s  la asignacion de tipos no es valida" %(
+               var1["tipo"], var2["tipo"] 
+            ))
+
+        cuad=Cuadruplo("=",var2['nombre'],'',var1['nombre'])
+        self.estatutos.append(cuad)
+
+    def negacion(self):
+        otroId = self.varIds.pop()
+
+        var=self.tabla.buscar_variable(otroId)
+
+        if var["tipo"] != "bool":
+            raise Exception("ERROR: solo se pueden negar variables de tipo bool " )
+
+        temporal = self.tabla.agregar_temporal("bool")
+        self.varIds.append(temporal['nombre'])
+
+        cuad = Cuadruplo("!",var['nombre'],'',temporal['nombre'])
+        self.estatutos.append(cuad)
+
+
+
+    def operacion(self, tipo1, tipo2, op):
         try:
             resultado = CUBO[tipo1][tipo2][op]
         except KeyError:
@@ -41,5 +71,5 @@ class Programa:
         for estatuto in self.estatutos:
             print estatuto.toString()
 
-    def addVar(self, id):
+    def add_var(self, id):
         self.varIds.append(id)
