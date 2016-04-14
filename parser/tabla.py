@@ -3,7 +3,7 @@ class Tabla():
         self.variables = {}
         self.funciones = {}
         self.constantes = {}
-    
+
     def buscar_variable(self, nombre):
         try:
             return self.variables[nombre]
@@ -14,22 +14,18 @@ class Tabla():
         if variable in self.variables.keys():
             raise Exception('Variable ya existe: ' + variable)
 
-        self.variables[variable] = {
+        var = {
             'tipo': tipo,
             'id': len(self.variables.keys())
         }
 
-    def variable_existe(self, variable):
-        try:
-            return self.variables[variable]
-        except KeyError:
-            raise Exception('Variable no declarada: ' + variable)
+        self.variables[variable] = var
+        return var
 
     def print_vars(self):
-        
         for nombre,var in self.variables.items():
             print nombre,var["tipo"]
-        
+
     def agregar_funcion(self, funcion, tipo):
         if funcion in self.funciones.keys():
             raise Exception('Funcion ya existe: '+ funcion)
@@ -38,14 +34,14 @@ class Tabla():
             'tipo':tipo,
             'id': len(self.funciones.keys())
         }
-    def funcion_existe(self, funcion):
+
+    def buscar_funcion(self, funcion):
         try:
             return self.funciones[funcion]
         except KeyError:
             raise Exception('Funcion no declarada')
 
     def print_funcion(self):
-        
         for nombre,var in self.funciones.items():
             print nombre,var["tipo"]
 
