@@ -47,10 +47,18 @@ class Tabla():
             print nombre,var["tipo"]
 
     def agregar_constante(self, constante, tipo):
-       self.constantes[constante] = {
+        if constante in self.variables.keys():
+            return
+
+
+        const = {
+            'nombre': constante, 
             'tipo': tipo,
-            'id': len(self.constantes.keys())
+            'id': len(self.variables.keys())
         }
+
+        self.constantes[constante] = const
+        self.variables[constante] = const
 
     def print_constante(self):
         for nombre,var in self.constantes.items():

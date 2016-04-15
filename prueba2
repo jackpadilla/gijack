@@ -3,10 +3,17 @@ int main
 { 
 	int x;
 	int y;
-	int z;
+	int z; 
+	float j;
+	bool flag;
+	string mensaje;
+	mensaje="hola";
+	flag=.TRUE;
 	z=x*y+x-z;
 	y=x+z;
 	bool no;
 	no=!no;
+	x = 2 + 2;
+	j=4.4;
 
 }

@@ -43,10 +43,11 @@ argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
 
 funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion($varId.text, $varTipo.text)};
 
+
 const:
   ( varId=INT {self.tabla.agregar_constante($varId.text, "int")}
   | varId=FLOAT {self.tabla.agregar_constante($varId.text, "float")}
-  | varId=STRING {self.tabla.agregar_constante($varId.text, "String")}
+  | varId=STRING {self.tabla.agregar_constante($varId.text, "string")}
   | varId=BOOL {self.tabla.agregar_constante($varId.text, "bool")}
   );
 
@@ -91,7 +92,7 @@ fact
   ;
 
 f
-  : const 
+  : varId=const {self.programa2.add_var($varId.text)}
   | varId=simple_id {self.programa2.add_var($varId.text)}
   ;
 
@@ -141,7 +142,7 @@ FLOAT
     | ('0'..'9')+ EXPONENT
     ;
 
-BOOL: ('TRUE' | 'FALSE');
+BOOL: '.'('TRUE' | 'FALSE');
 
 WS: (' '| '\t'| '\r'| '\n') -> skip;
 

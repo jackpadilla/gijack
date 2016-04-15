@@ -24,6 +24,9 @@ class Programa:
         cuad = Cuadruplo(operador,var1['nombre'],var2['nombre'],temporal['nombre'])
         self.estatutos.append(cuad)
 
+        #Para constantes
+
+
     def asignacion(self, variable):
         otroId = self.varIds.pop()
 
