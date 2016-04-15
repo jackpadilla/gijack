@@ -112,6 +112,15 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#ifAux.
+    def enterIfAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#ifAux.
+    def exitIfAux(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#elseCond.
     def enterElseCond(self, ctx):
         pass

@@ -7,6 +7,7 @@ class Programa:
         self.nombre = nombre
         self.estatutos = []
         self.varIds = []
+        self.saltos = []
 
     def aritmetica(self, operador):
    
@@ -88,10 +89,29 @@ class Programa:
             ))
 
         return resultado
+    
+    def si(self):
+        otroId = self.varIds.pop()
+
+        var=self.tabla.buscar_variable(otroId)
+
+        if var["tipo"] != "bool":
+            raise Exception("ERROR:  " )
+
+        self.saltos.append(len(self.estatutos))
+
+        cuad = Cuadruplo("gotof",var['nombre'],'_','')
+        self.estatutos.append(cuad)
+
+    def talvez(self):
+        cont = self.saltos.pop()
+        cuad = self.estatutos[cont]
+
+        cuad.direccion2 = str(len(self.estatutos))
 
     def dump(self):
-        for estatuto in self.estatutos:
-            print estatuto.toString()
+        for i, estatuto in enumerate(self.estatutos):
+            print "[%d] %s" % (i, estatuto.toString())
 
     def add_var(self, id):
         self.varIds.append(id)

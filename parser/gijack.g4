@@ -22,7 +22,9 @@ ciclos: (whileLoop | doLoop | forLoop) ;
 
 condicion: ifCond elseifCond* elseCond? ;
 
-ifCond: TK_IF PAREN_LEFT expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+ifCond: ifAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.talvez()};
+
+ifAux: TK_IF PAREN_LEFT expresion PAREN_RIGHT {self.programa2.si()}; 
 
 elseCond: TK_ELSE CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
