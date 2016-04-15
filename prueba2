@@ -9,6 +9,8 @@ int main
 	string mensaje;
 	mensaje="hola";
 	flag=.TRUE;
+	read (x);
+	print (mensaje);
 	z=x*y+x-z;
 	y=x+z;
 	bool no;

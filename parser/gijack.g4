@@ -34,7 +34,7 @@ variable
   ;
 
 imprimir
-  : TK_PRINT PAREN_LEFT expresion (COMMA expresion)* PAREN_RIGHT DELIMITER ;
+  : TK_PRINT PAREN_LEFT expresion PAREN_RIGHT DELIMITER {self.programa2.imprimir()}; 
 
 tipo returns [String varTipo]
   : var=('bool'| 'string' | 'int' | 'float' ) {$varTipo=$var.text};
@@ -94,9 +94,10 @@ fact
 f
   : varId=const {self.programa2.add_var($varId.text)}
   | varId=simple_id {self.programa2.add_var($varId.text)}
+  | func_call
   ;
 
-lectura: TK_READ PAREN_LEFT simple_id (COMMA simple_id)* PAREN_RIGHT DELIMITER ;
+lectura: TK_READ PAREN_LEFT varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text)}; 
 
 func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla.funcion_existe($varId.text)} ;
 

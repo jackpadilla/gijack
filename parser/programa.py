@@ -41,6 +41,17 @@ class Programa:
         cuad=Cuadruplo("=",var2['nombre'],'',var1['nombre'])
         self.estatutos.append(cuad)
 
+    def lectura(self, variable):
+       
+
+        var1 = self.tabla.buscar_variable(variable)
+        
+
+        
+
+        cuad=Cuadruplo("read",'','',var1['nombre'])
+        self.estatutos.append(cuad)
+
     def negacion(self):
         otroId = self.varIds.pop()
 
@@ -55,7 +66,15 @@ class Programa:
         cuad = Cuadruplo("!",var['nombre'],'',temporal['nombre'])
         self.estatutos.append(cuad)
 
+    def imprimir(self):
+        otroId = self.varIds.pop()
 
+        var=self.tabla.buscar_variable(otroId)
+
+
+
+        cuad = Cuadruplo("print",var['nombre'],'','')
+        self.estatutos.append(cuad)
 
     def operacion(self, tipo1, tipo2, op):
         try:
