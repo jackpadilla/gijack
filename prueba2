@@ -4,11 +4,16 @@ int main
 	int x;
 	int y;
 	int z; 
-	if(5<4)
-	{ 
-		int i;
-		i=1+1+1+1+1+1;
+	int antesdelfor;
+	int r;
+	antesdelfor=2;
+	for(r=0;r<2;r+1){
+		int estoyDentro;
+		estoyDentro=1;
 	}
+
+	int aquiTermina;
+	aquiTermina=2;
 	float j;
 	bool flag;
 	string mensaje;
