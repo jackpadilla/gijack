@@ -67,6 +67,33 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#forAux.
+    def enterForAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#forAux.
+    def exitForAux(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#forAux2.
+    def enterForAux2(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#forAux2.
+    def exitForAux2(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#forAux3.
+    def enterForAux3(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#forAux3.
+    def exitForAux3(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#whileLoop.
     def enterWhileLoop(self, ctx):
         pass
@@ -76,12 +103,39 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#whileAux.
+    def enterWhileAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#whileAux.
+    def exitWhileAux(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#whileAux2.
+    def enterWhileAux2(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#whileAux2.
+    def exitWhileAux2(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#doLoop.
     def enterDoLoop(self, ctx):
         pass
 
     # Exit a parse tree produced by gijackParser#doLoop.
     def exitDoLoop(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#doAux.
+    def enterDoAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#doAux.
+    def exitDoAux(self, ctx):
         pass
 
 
@@ -127,6 +181,15 @@ class gijackListener(ParseTreeListener):
 
     # Exit a parse tree produced by gijackParser#elseCond.
     def exitElseCond(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#elseAux.
+    def enterElseAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#elseAux.
+    def exitElseAux(self, ctx):
         pass
 
 

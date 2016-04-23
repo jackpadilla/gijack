@@ -12,23 +12,37 @@ lista: expresion (COMMA expresion)* ;
 
 asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)};
 
-forLoop: TK_FOR PAREN_LEFT (asignacion | variable) expresion DELIMITER expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+forLoop:forAux forAux2 forAux3 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT{self.programa2.vez()};
 
-whileLoop: TK_WHILE  PAREN_LEFT expresion PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+forAux:TK_FOR PAREN_LEFT (asignacion | variable) {self.programa2.mientras()};
 
-doLoop: TK_DO CURLY_BRACKET_LEFT proceso CURLY_BRACKET_RIGHT TK_WHILE PAREN_LEFT expresion PAREN_RIGHT DELIMITER ;
+forAux2:expresion DELIMITER {self.programa2.quiereme()};
+
+forAux3:expresion PAREN_RIGHT {self.programa2.otra()};
+
+whileLoop: whileAux whileAux2 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.viendo()} ;
+
+whileAux: TK_WHILE {self.programa2.mientras()} ; 
+
+whileAux2: PAREN_LEFT expresion PAREN_RIGHT {self.programa2.siga()} ;
+
+doLoop: doAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT TK_WHILE PAREN_LEFT expresion PAREN_RIGHT DELIMITER {self.programa2.tucara()} ;
+
+doAux: TK_DO {self.programa2.mientras()} ; 
 
 ciclos: (whileLoop | doLoop | forLoop) ;
 
-condicion: ifCond elseifCond* elseCond? ;
+condicion: ifCond elseifCond* elseCond? {self.programa2.pudieras()} ; 
 
-ifCond: ifAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.talvez()};
+ifCond: ifAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT ;
 
 ifAux: TK_IF PAREN_LEFT expresion PAREN_RIGHT {self.programa2.si()}; 
 
-elseCond: TK_ELSE CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
+elseCond: elseAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
-elseifCond: TK_ELSE ifCond ;
+elseAux: TK_ELSE {self.programa2.talvez()};  
+
+elseifCond: elseAux ifCond {self.programa2.comprender()};
 
 variable
   : varTipo=tipo varId=simple_id DELIMITER {self.tabla.agregar_variable($varId.text, $varTipo.text)}
