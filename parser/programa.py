@@ -22,7 +22,7 @@ class Programa:
         temporal = self.tabla.agregar_temporal(tipo)
         self.varIds.append(temporal['nombre'])
 
-        cuad = Cuadruplo(operador,var1['nombre'],var2['nombre'],temporal['nombre'])
+        cuad = Cuadruplo(operador,var1['id'],var2['id'],temporal['id'])
         self.estatutos.append(cuad)
 
         #Para constantes
@@ -39,13 +39,13 @@ class Programa:
                var1["tipo"], var2["tipo"] 
             ))
 
-        cuad=Cuadruplo("=",var2['nombre'],'',var1['nombre'])
+        cuad=Cuadruplo("=",var2['id'],'',var1['id'])
         self.estatutos.append(cuad)
 
     def lectura(self, variable):
         var1 = self.tabla.buscar_variable(variable)
         
-        cuad=Cuadruplo("read",'','',var1['nombre'])
+        cuad=Cuadruplo("read",'','',var1['id'])
         self.estatutos.append(cuad)
 
     def negacion(self):
@@ -59,7 +59,7 @@ class Programa:
         temporal = self.tabla.agregar_temporal("bool")
         self.varIds.append(temporal['nombre'])
 
-        cuad = Cuadruplo("!",var['nombre'],'',temporal['nombre'])
+        cuad = Cuadruplo("!",var['id'],'',temporal['id'])
         self.estatutos.append(cuad)
 
     def imprimir(self):
@@ -67,7 +67,7 @@ class Programa:
 
         var=self.tabla.buscar_variable(otroId)
 
-        cuad = Cuadruplo("print",var['nombre'],'','')
+        cuad = Cuadruplo("print",var['id'],'','')
         self.estatutos.append(cuad)
 
     def operacion(self, tipo1, tipo2, op):
@@ -93,7 +93,7 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad = Cuadruplo("gotof",var['nombre'],'_','')
+        cuad = Cuadruplo("gotof",var['id'],'_','')
         self.estatutos.append(cuad)
 
     def talvez(self):
@@ -136,7 +136,7 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad = Cuadruplo("gotof",var['nombre'],'_','')
+        cuad = Cuadruplo("gotof",var['id'],'_','')
         self.estatutos.append(cuad)
     #rellena la funcion while
     def viendo(self):
@@ -161,7 +161,7 @@ class Programa:
        
         verdadero=self.saltos.pop()
 
-        cuad = Cuadruplo("gotot",var['nombre'],verdadero,'')
+        cuad = Cuadruplo("gotot",var['id'],verdadero,'')
         self.estatutos.append(cuad)
 
     #ciclo for
@@ -177,7 +177,7 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad2 = Cuadruplo("gotof",var['nombre'],'_','')
+        cuad2 = Cuadruplo("gotof",var['id'],'_','')
         self.estatutos.append(cuad2)
 
     def otra(self):
@@ -205,6 +205,13 @@ class Programa:
     def dump(self):
         for i, estatuto in enumerate(self.estatutos):
             print "[%d] %s" % (i, estatuto.toString())
+
+    def escribo(self):
+        f= open('cuadruplos','w')
+        for i, estatuto in enumerate(self.estatutos):
+            f.write(estatuto.toString())
+            f.write('\n')
+
 
     def add_var(self, id):
         self.varIds.append(id)
