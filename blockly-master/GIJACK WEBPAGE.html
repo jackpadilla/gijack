@@ -1,0 +1,146 @@
+<!-- Blockly Webpage.html*/ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Proyecto de Compiladores: GIJACK</title>
+</head>
+
+<body>
+<textarea id="textarea" rows="4" cols="50">
+</textarea> 
+ <button onclick="myUpdateFunction()">Generate Code</button> 
+
+<!-- generates code function -->
+<script>
+function myUpdateFunction(event) {
+  var code = Blockly.gijack.workspaceToCode(workspace);
+  document.getElementById('textarea').value = code;
+}
+
+</script>
+
+<!--Blocky div where the content will be loaded -->
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<!--div where where the script and xml inject for blocky is done -->
+<div> 
+<!-- core Blockly script and the core blocks set -->
+<script src="blockly_uncompressed.js"></script>
+<!--script src="blocks_compressed.js"></script-->
+<!-- code generation for javascript --> 
+
+<script src="blocks/math.js"></script>
+<script src="blocks/text.js"></script>
+<script src="blocks/variables.js"></script>
+<script src="blocks/loops.js"></script>
+<script src="blocks/procedures.js"></script>
+<script src="blocks/lists.js"></script>
+<script src="blocks/colour.js"></script>
+<script src="blocks/logic.js"></script>
+
+<script src="generators/gijack.js"></script>
+<script src="generators/gijack/math.js"></script>
+<script src="generators/gijack/text.js"></script>
+<script src="generators/gijack/variables.js"></script>
+<script src="generators/gijack/logic.js"></script>
+
+
+<!-- messages for the user's language (in this case English) -->
+<script src="msg/js/en.js"></script>
+<!--structure of the toolbox-->
+<xml id="toolbox" style="display: none">
+  <category name="Logica" colour="120">
+  	<block type="logic_compare"></block>
+  	<sep gap="20"></sep>
+    <block type="logic_operation"></block>
+    <sep gap="20"></sep>
+    <block type="logic_boolean"></block>
+    <sep gap="20"></sep>
+    <block type="controls_if"></block>
+    <sep gap="20"></sep>
+    <block type="logic_negate"></block>
+
+    
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Ciclos" colour="160">
+  	<block type="controls_repeat_ext"></block>
+  	<block type="controls_whileUntil"></block>
+  	<block type="controls_for"></block>
+  	<block type="controls_forEach"></block>
+
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Matematicas" colour="200">
+  	<block type="math_number"></block>
+  	<block type="math_arithmetic"></block>
+  
+  	<block type="math_modulo"></block>
+
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Variables" colour="240">
+  	<block type="declare_var"></block>
+    <block type="use_var"></block>
+
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Funciones" colour="280" custom="PROCEDURE">
+  	<block type="procedures_defreturn"></block>
+  	<block type="procedures_callreturn"></block>
+   	<block type="procedures_ifreturn"></block>
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Strings" colour="320">
+  	<block type="text"></block>
+  	<block type="text_join"></block>
+  	<block type="text_append"></block>
+  	<block type="text_length"></block>
+  	<block type="text_isEmpty"></block>
+  	<block type="text_print"></block>
+  	<block type="text_prompt_ext"></block>
+  </category>
+  <sep gap="32"></sep>
+
+  <category name="Listas" colour="360">
+  	<block type="lists_create_empty"></block>
+  	<block type="lists_create_with"></block>
+   	<block type="lists_repeat"></block>
+   	<block type="lists_setIndex"></block> 
+  </category>
+
+</xml>
+<!-- Injecting Blockly into an empty div. This script should be at the bottom of the page, or called by the onload event. -->
+<script>
+var workspace = Blockly.inject('blocklyDiv',
+    {toolbox: document.getElementById('toolbox'),
+     grid:
+         {spacing: 25,
+          length: 2,
+          colour: '#ccc',
+          snap: true},
+     trashcan: true,
+ zoom:
+         {controls: false,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 2,
+          minScale: 0.5,
+          scaleSpeed: 1.2},
+});
+</script>
+
+</div>
+
+
+
+</body>
+
+</html> 
