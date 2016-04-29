@@ -22,7 +22,7 @@ class Programa:
         temporal = self.tabla.agregar_temporal(tipo)
         self.varIds.append(temporal['nombre'])
 
-        cuad = Cuadruplo(operador,var1['id'],var2['id'],temporal['id'])
+        cuad = Cuadruplo(operador,var2['id'],var1['id'],temporal['id'])
         self.estatutos.append(cuad)
 
         #Para constantes
@@ -39,13 +39,13 @@ class Programa:
                var1["tipo"], var2["tipo"] 
             ))
 
-        cuad=Cuadruplo("=",var2['id'],'',var1['id'])
+        cuad=Cuadruplo("=",var2['id'],'_',var1['id'])
         self.estatutos.append(cuad)
 
     def lectura(self, variable):
         var1 = self.tabla.buscar_variable(variable)
         
-        cuad=Cuadruplo("read",'','',var1['id'])
+        cuad=Cuadruplo("read",'_','_',var1['id'])
         self.estatutos.append(cuad)
 
     def negacion(self):
@@ -59,7 +59,7 @@ class Programa:
         temporal = self.tabla.agregar_temporal("bool")
         self.varIds.append(temporal['nombre'])
 
-        cuad = Cuadruplo("!",var['id'],'',temporal['id'])
+        cuad = Cuadruplo("!",var['id'],'_',temporal['id'])
         self.estatutos.append(cuad)
 
     def imprimir(self):
@@ -67,7 +67,7 @@ class Programa:
 
         var=self.tabla.buscar_variable(otroId)
 
-        cuad = Cuadruplo("print",var['id'],'','')
+        cuad = Cuadruplo("print",var['id'],'_','_')
         self.estatutos.append(cuad)
 
     def operacion(self, tipo1, tipo2, op):
@@ -93,11 +93,11 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad = Cuadruplo("gotof",var['id'],'_','')
+        cuad = Cuadruplo("gotof",var['id'],'_','_')
         self.estatutos.append(cuad)
 
     def talvez(self):
-        cuad = Cuadruplo("goto",'','_','')
+        cuad = Cuadruplo("goto",'_','_','_')
         self.estatutos.append(cuad)
         
         cont = self.saltos.pop()
@@ -136,14 +136,14 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad = Cuadruplo("gotof",var['id'],'_','')
+        cuad = Cuadruplo("gotof",var['id'],'_','_')
         self.estatutos.append(cuad)
     #rellena la funcion while
     def viendo(self):
         falso=self.saltos.pop()
         retorno=self.saltos.pop()
 
-        cuad = Cuadruplo("goto",' ',retorno,'')
+        cuad = Cuadruplo("goto",'_',retorno,'_')
         self.estatutos.append(cuad)
 
         cuad = self.estatutos[falso]
@@ -161,15 +161,12 @@ class Programa:
        
         verdadero=self.saltos.pop()
 
-        cuad = Cuadruplo("gotot",var['id'],verdadero,'')
+        cuad = Cuadruplo("gotot",var['id'],verdadero,'_')
         self.estatutos.append(cuad)
 
     #ciclo for
     def quiereme(self):
-        cuad =Cuadruplo('','','','')
-        self.estatutos.append(cuad)
         otroId = self.varIds.pop()
-
         var=self.tabla.buscar_variable(otroId)
 
         if var["tipo"] != "bool":
@@ -177,8 +174,12 @@ class Programa:
 
         self.saltos.append(len(self.estatutos))
 
-        cuad2 = Cuadruplo("gotof",var['id'],'_','')
+        cuad2 = Cuadruplo("gotof",var['id'],'_','_')
         self.estatutos.append(cuad2)
+
+        cuad =Cuadruplo('','','','')
+        self.estatutos.append(cuad)
+        
 
     def otra(self):
         cuad = self.estatutos.pop()
@@ -193,7 +194,7 @@ class Programa:
         falso=self.saltos.pop()
         retorno=self.saltos.pop()
 
-        cuad = Cuadruplo("goto",' ',retorno,'')
+        cuad = Cuadruplo("goto",'_',retorno,'_')
         self.estatutos.append(cuad)
 
         cuad = self.estatutos[falso]
@@ -207,11 +208,18 @@ class Programa:
             print "[%d] %s" % (i, estatuto.toString())
 
     def escribo(self):
-        f= open('cuadruplos','w')
-        for i, estatuto in enumerate(self.estatutos):
-            f.write(estatuto.toString())
-            f.write('\n')
+        with open('cuadruplos','w') as f:
+            for tipo, cantidad in self.tabla.memoria.items():
+                f.write("gen %s %d" % (tipo, cantidad))
+                f.write("\n")
 
+            for nombre,constante in self.tabla.constantes.items():
+                f.write("const %s %s %s" % (constante["tipo"], constante["id"], nombre))
+                f.write("\n")
 
+            for i, estatuto in enumerate(self.estatutos):
+                f.write(estatuto.toString())
+                f.write("\n")            
+    
     def add_var(self, id):
         self.varIds.append(id)

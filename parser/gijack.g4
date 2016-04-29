@@ -18,7 +18,7 @@ forAux:TK_FOR PAREN_LEFT (asignacion | variable) {self.programa2.mientras()};
 
 forAux2:expresion DELIMITER {self.programa2.quiereme()};
 
-forAux3:expresion PAREN_RIGHT {self.programa2.otra()};
+forAux3:asignacion PAREN_RIGHT {self.programa2.otra()};
 
 whileLoop: whileAux whileAux2 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.viendo()} ;
 

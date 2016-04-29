@@ -76,7 +76,7 @@ def serializedATN():
         buf.write(u"\u0091\3\2\2\2\u0093\u0092\3\2\2\2\u0094\u0095\3\2\2")
         buf.write(u"\2\u0095\u0096\b\t\1\2\u0096\21\3\2\2\2\u0097\u0098\5")
         buf.write(u"D#\2\u0098\u0099\7\31\2\2\u0099\u009a\b\n\1\2\u009a\23")
-        buf.write(u"\3\2\2\2\u009b\u009c\5D#\2\u009c\u009d\7\37\2\2\u009d")
+        buf.write(u"\3\2\2\2\u009b\u009c\5\f\7\2\u009c\u009d\7\37\2\2\u009d")
         buf.write(u"\u009e\b\13\1\2\u009e\25\3\2\2\2\u009f\u00a0\5\30\r\2")
         buf.write(u"\u00a0\u00a1\5\32\16\2\u00a1\u00a2\7\32\2\2\u00a2\u00a3")
         buf.write(u"\5\6\4\2\u00a3\u00a4\7\33\2\2\u00a4\u00a5\b\f\1\2\u00a5")
@@ -918,8 +918,8 @@ class gijackParser ( Parser ):
             super(gijackParser.ForAux3Context, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def expresion(self):
-            return self.getTypedRuleContext(gijackParser.ExpresionContext,0)
+        def asignacion(self):
+            return self.getTypedRuleContext(gijackParser.AsignacionContext,0)
 
 
         def PAREN_RIGHT(self):
@@ -946,7 +946,7 @@ class gijackParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 153
-            self.expresion()
+            self.asignacion()
             self.state = 154
             self.match(gijackParser.PAREN_RIGHT)
             self.programa2.otra()

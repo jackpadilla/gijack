@@ -3,6 +3,12 @@ class Tabla():
         self.variables = {}
         self.funciones = {}
         self.constantes = {}
+        self.memoria = {
+            'int':0,
+            'float':0,
+            'bool':0,
+            'string':0
+        }
 
     def buscar_variable(self, nombre):
         try:
@@ -17,11 +23,17 @@ class Tabla():
         var = {
             'nombre': variable, 
             'tipo': tipo,
-            'id': len(self.variables.keys())
+            'id': self.pedir_id(tipo)
         }
 
         self.variables[variable] = var
         return var
+
+    def pedir_id(self,tipo):
+        nuevoId= tipo[0]+ str(self.memoria[tipo])
+        self.memoria[tipo]+=1
+        return nuevoId
+
 
     def print_vars(self):
         for nombre,var in self.variables.items():
@@ -50,15 +62,7 @@ class Tabla():
         if constante in self.variables.keys():
             return
 
-
-        const = {
-            'nombre': constante, 
-            'tipo': tipo,
-            'id': len(self.variables.keys())
-        }
-
-        self.constantes[constante] = const
-        self.variables[constante] = const
+        self.constantes[constante] = self.agregar_variable(constante, tipo)
 
     def print_constante(self):
         for nombre,var in self.constantes.items():
