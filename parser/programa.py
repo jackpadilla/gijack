@@ -10,6 +10,8 @@ class Programa:
         self.saltos = []
         self.ifelsecount = 1
         self.cuadruplosFor=[]
+        self.paramcount=0
+        self.funcName=""
 
     def aritmetica(self, operador):
         id1 = self.varIds.pop()
@@ -200,8 +202,64 @@ class Programa:
         cuad = self.estatutos[falso]
         cuad.direccion2 = str(len(self.estatutos))
 
+    def brincamain(self):
+        cuad = Cuadruplo("goto",'_','_','_')
+        self.estatutos.append(cuad)
 
 
+    def brincaprincipio(self,tipo):
+        self.tabla.agregar_funcion("main",tipo,len(self.estatutos))
+        cuad=self.estatutos[0]
+        cuad.direccion2=str(len(self.estatutos))
+    
+    def regresafuncion(self):
+        cuad =Cuadruplo("endfunc",'_','_','_')
+        self.estatutos.append(cuad)
+    
+    def retornar(self):
+        respuesta=self.varIds.pop()
+        var = self.tabla.buscar_variable(respuesta)
+        func = self.tabla.buscar_funcion(self.funcName)
+        fuk = func["variable"]["id"] if func["variable"] else "_"
+        cuad =Cuadruplo("return",var["id"],'_',fuk)
+        self.estatutos.append(cuad)
+
+    def llamarfunc(self,nombre):
+        func= self.tabla.buscar_funcion(nombre)
+        cuad =Cuadruplo("era",func['id'],'_','_')
+        self.estatutos.append(cuad)
+        self.paramcount=0;
+        self.funcName=nombre
+
+    def generarPam(self):
+        parametro=self.varIds.pop()
+        var=self.tabla.buscar_variable(parametro)
+        par=self.tabla.obtener_parametro(self.paramcount,self.funcName)
+
+        if var["tipo"] != par["tipo"]:
+            raise Exception("ERROR: %s %s  la asignacion de parametros de tipos no es valida" %(
+               var["tipo"], par["tipo"] 
+            ))
+        cuad =Cuadruplo("param",var["id"],'_',par["id"])
+        self.estatutos.append(cuad)
+        self.paramcount+=1
+
+    def argumentar(self,nombre,tipo):
+        var=self.tabla.agregar_variable(nombre,tipo)
+        self.tabla.agregar_parametro(var)
+
+    def declarar_funcion(self, nombre, tipo):
+        self.tabla.agregar_funcion(nombre, tipo,len(self.estatutos))
+        self.funcName = nombre
+
+    def gosubrut(self):
+        func= self.tabla.buscar_funcion(self.funcName)
+        cuad =Cuadruplo("gosub",func['contador'],'_','_')
+        self.estatutos.append(cuad)
+
+        if func["variable"]:
+            var = func["variable"]
+            self.varIds.append(var["nombre"])
 
     def dump(self):
         for i, estatuto in enumerate(self.estatutos):
@@ -214,8 +272,9 @@ class Programa:
                 f.write("\n")
 
             for nombre,constante in self.tabla.constantes.items():
-                f.write("const %s %s %s" % (constante["tipo"], constante["id"], nombre))
-                f.write("\n")
+                if constante["add"]:
+                    f.write("const %s %s %s" % (constante["tipo"], constante["id"], nombre))
+                    f.write("\n")
 
             for i, estatuto in enumerate(self.estatutos):
                 f.write(estatuto.toString())

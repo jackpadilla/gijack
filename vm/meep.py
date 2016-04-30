@@ -6,6 +6,7 @@ class Meep:
         self.estatutos = []
         self.contador = 0
         self.memoria = Memoria()
+        self.cont2=[]
 
     def read_meeps(self, filename):
         with open(filename, "r+") as archivo:
@@ -90,6 +91,21 @@ class Meep:
         
         elif instruccion == 'gotot': 
             self.irt(direccion1,direccion2)
+        
+        elif instruccion == 'return': 
+            self.retorno(direccion1,resultado)
+
+        elif instruccion == 'endfunc': 
+            self.finfun()
+
+        elif instruccion == 'era': 
+            self.era(direccion1)
+
+        elif instruccion == 'gosub': 
+            self.irsub(direccion1)
+
+        elif instruccion == 'param': 
+            self.param(direccion1,resultado)
 
         self.contador += 1
 
@@ -171,6 +187,25 @@ class Meep:
 
     def ir(self,res):
         self.contador=int(res)-1
+    
+    def retorno(self,dir1,res):
+        valor = self.memoria.obtenerVariable(dir1)
+        self.memoria.ponerValor(res, valor)
+    def era(self,dir1):
+        print "era"
+
+    def irsub(self,dir1):
+        self.cont2.append(self.contador)
+        self.contador=int(dir1)-1
+        
+
+    def finfun(self):
+        self.contador=self.cont2.pop()
+        
+
+    def param(self,dir1,res):
+        valor = self.memoria.obtenerVariable(dir1)
+        self.memoria.ponerValor(res, valor)
        
 
 

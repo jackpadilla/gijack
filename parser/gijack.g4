@@ -2,11 +2,17 @@ grammar gijack;
 
 start: programa EOF;
 
-programa: TK_PROGRAM ID DELIMITER funcion* vartipo=tipo 'main' CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion("main", $vartipo.text)};
+programa: programAux funcion* main CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT ;
+
+programAux:TK_PROGRAM ID DELIMITER {self.programa2.brincamain()};
+
+main: vartipo=tipo 'main' {self.programa2.brincaprincipio($vartipo.text)};
 
 procesos: proceso+;
 
-proceso: (asignacion | condicion | ciclos | imprimir | lectura | func_call | variable ) ;
+retorno: 'return' expresion DELIMITER {self.programa2.retornar()};
+
+proceso: (asignacion | condicion | ciclos | imprimir | lectura | (func_call DELIMITER) | variable |retorno ) ;
 
 lista: expresion (COMMA expresion)* ;
 
@@ -55,10 +61,14 @@ imprimir
 tipo returns [String varTipo]
   : var=('bool'| 'string' | 'int' | 'float' ) {$varTipo=$var.text};
 
-argumentos: (tipo simple_id (COMMA tipo simple_id)* )? ;
+argumentos: (arguAux (COMMA arguAux)* )? ;
 
-funcion: TK_FUNC varTipo=tipo? varId=ID PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.tabla.agregar_funcion($varId.text, $varTipo.text)};
+arguAux:varTipo=tipo varId=simple_id {self.programa2.argumentar($varId.text, $varTipo.text)}
+;
 
+funcion: funcionAux PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.regresafuncion()};
+
+funcionAux: TK_FUNC varTipo=tipo? varId=ID {self.programa2.declarar_funcion($varId.text, $varTipo.text)};
 
 const:
   ( varId=INT {self.tabla.agregar_constante($varId.text, "int")}
@@ -115,9 +125,13 @@ f
 
 lectura: TK_READ PAREN_LEFT varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text)}; 
 
-func_call: varId=simple_id PAREN_LEFT call_arg PAREN_RIGHT DELIMITER {self.tabla.funcion_existe($varId.text)} ;
+func_call: callAux PAREN_LEFT call_arg PAREN_RIGHT {self.programa2.gosubrut()};
 
-call_arg: (expresion (COMMA expresion )*)? ;
+callAux:varId=simple_id {self.programa2.llamarfunc($varId.text)} ;
+
+call_arg: ( call_argaux (COMMA call_argaux )*)? ;
+
+call_argaux: expresion {self.programa2.generarPam()};
 
 simple_id returns [String varId]
   : var=ID {$varId=$var.text}

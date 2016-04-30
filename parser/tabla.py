@@ -9,15 +9,29 @@ class Tabla():
             'bool':0,
             'string':0
         }
+        self.contexto = ""
 
     def buscar_variable(self, nombre):
         try:
-            return self.variables[nombre]
+            return self.traer_contexto()[nombre]
         except KeyError:
-            raise Exception("ERROR: Variable %s no definida" % nombre)
+            try:
+                return self.variables["constantes"][nombre]
+            
+            except:
+
+                raise Exception("ERROR: Variable %s no definida" % nombre)
+
+    def traer_contexto(self):
+        if not self.contexto in self.variables:
+            self.variables[self.contexto] = {}
+    
+        return self.variables[self.contexto]
+
+
 
     def agregar_variable(self, variable, tipo):
-        if variable in self.variables.keys():
+        if variable in self.traer_contexto().keys():
             raise Exception('Variable ya existe: ' + variable)
 
         var = {
@@ -26,7 +40,7 @@ class Tabla():
             'id': self.pedir_id(tipo)
         }
 
-        self.variables[variable] = var
+        self.traer_contexto()[variable] = var
         return var
 
     def pedir_id(self,tipo):
@@ -36,39 +50,71 @@ class Tabla():
 
 
     def print_vars(self):
-        for nombre,var in self.variables.items():
-            print nombre,var["tipo"]
+        for contexto,tabla in self.variables.items():
+            if tabla:
 
-    def agregar_funcion(self, funcion, tipo):
+                for nombre,var in tabla:
+                    print contexto,nombre,var["tipo"]
+
+    def agregar_funcion(self, funcion, tipo,contador):
         if funcion in self.funciones.keys():
             raise Exception('Funcion ya existe: '+ funcion)
 
-        self.funciones[funcion] ={
+        if tipo:
+            var = self.agregar_constante(funcion,tipo,False)
+        else:
+            var = None
+
+        self.funciones[funcion] = {
+            'contador':contador,
+            'variable': var,
+            'parametros':[],
             'tipo':tipo,
             'id': len(self.funciones.keys())
         }
+
+        self.contexto=funcion
+
 
     def buscar_funcion(self, funcion):
         try:
             return self.funciones[funcion]
         except KeyError:
-            raise Exception('Funcion no declarada')
+            raise Exception('Funcion no declarada %s' % funcion)
 
     def print_funcion(self):
         for nombre,var in self.funciones.items():
             print nombre,var["tipo"]
 
-    def agregar_constante(self, constante, tipo):
-        if constante in self.variables.keys():
-            return
+    def agregar_constante(self, constante, tipo, add=True):
+        contexto= self.contexto
+        self.contexto="constantes"
 
-        self.constantes[constante] = self.agregar_variable(constante, tipo)
+        if constante in self.traer_contexto().keys():
+            return self.traer_contexto()[constante]
+        
+        var = self.agregar_variable(constante, tipo)
+        var["add"] = add
+        self.constantes[constante] = var
+        self.contexto=contexto
+
+        return self.constantes[constante]
 
     def print_constante(self):
         for nombre,var in self.constantes.items():
             print nombre,var["tipo"]
 
     def agregar_temporal(self, tipo):
-        nombre = "___tmp_%s_%d" % (tipo, len(self.variables.keys()))
+        nombre = "___tmp_%s_%d" % (tipo, len(self.traer_contexto().keys()))
 
         return self.agregar_variable(nombre, tipo)
+
+    def agregar_parametro(self,parametro):
+        self.funciones[self.contexto]["parametros"].append(parametro)
+
+    def obtener_parametro(self,contador,contexto):
+        if contador >= len(self.funciones[contexto]["parametros"]):
+            raise Exception("Cantidad incorrecta de argumentos")
+        
+        return self.funciones[contexto]["parametros"][contador]
+

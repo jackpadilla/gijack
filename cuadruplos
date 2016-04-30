@@ -1,94 +1,12 @@
-gen int 20
-gen float 8
-gen bool 12
-gen string 12
-const string s3 "no funciona"
-const string s2 "es verdad"
-const string s1 "do while"
-const string s7 "soy 3"
-const float f4 1.0
-const float f3 4.0
-const string s4 "vamos bient"
-const string s9 "soy 5"
-const string s8 "soy 4"
-const bool b9 .TRUE
-const int i6 1
-const int i8 0
-const int i7 3
-const int i5 2
-const int i12 4
-const int i9 6
-const float f7 4.4
-const string s11 "hola"
-const string s6 "menor a 3"
-const string s5 "while"
-const string s0 "r="
-= f3 _ f0
-= f4 _ f1
-/ f0 f1 f5
-= f5 _ f2
-print f2 _ _
-= i5 _ i3
-= i6 _ i0
-= i5 _ i1
-= i7 _ i2
-= i8 _ i4
-< i4 i9 b0
-gotof b0 17 _
-print s0 _ _
-print i4 _ _
-+ i4 i6 i10
-= i10 _ i4
-goto _ 10 _
-print s1 _ _
-print i4 _ _
-- i4 i6 i11
-= i11 _ i4
-> i4 i6 b1
-gotot b1 17 _
-> i7 i5 b2
-gotof b2 26 _
-print s2 _ _
-< i12 i5 b3
-gotof b3 30 _
-print s3 _ _
-goto _ 31 _
-print s4 _ _
-< i4 i9 b4
-gotof b4 51 _
-print s5 _ _
-print i4 _ _
-<= i4 i7 b5
-gotof b5 43 _
-< i4 i7 b6
-gotof b6 41 _
-print s6 _ _
-goto _ 42 _
-print s7 _ _
-goto _ 48 _
-== i4 i12 b7
-gotof b7 47 _
-print s8 _ _
-goto _ 48 _
-print s9 _ _
-+ i4 i6 i13
-= i13 _ i4
-goto _ 31 _
-= i5 _ i14
-= s11 _ s10
-= b9 _ b8
-read _ _ i0
-print s10 _ _
-* i0 i1 i15
-- i0 i2 i16
-+ i15 i16 i17
-= i17 _ i2
-+ i0 i2 i18
-= i18 _ i1
-! b10 _ b11
-= b11 _ b10
-+ i5 i5 i19
-= i19 _ i0
-= f7 _ f6
-print i0 _ _
-print f6 _ _
+gen int 4
+gen float 0
+gen bool 1
+gen string 0
+const int i3 1
+const int i2 2
+goto _ _ _
+< i1 i2 b0
+gotof b0 5 _
+return i3 _ i0
+goto _ _ _
+era 0 _ _

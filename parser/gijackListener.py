@@ -22,12 +22,39 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#programAux.
+    def enterProgramAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#programAux.
+    def exitProgramAux(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#main.
+    def enterMain(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#main.
+    def exitMain(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#procesos.
     def enterProcesos(self, ctx):
         pass
 
     # Exit a parse tree produced by gijackParser#procesos.
     def exitProcesos(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#retorno.
+    def enterRetorno(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#retorno.
+    def exitRetorno(self, ctx):
         pass
 
 
@@ -238,12 +265,30 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#arguAux.
+    def enterArguAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#arguAux.
+    def exitArguAux(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#funcion.
     def enterFuncion(self, ctx):
         pass
 
     # Exit a parse tree produced by gijackParser#funcion.
     def exitFuncion(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#funcionAux.
+    def enterFuncionAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#funcionAux.
+    def exitFuncionAux(self, ctx):
         pass
 
 
@@ -373,12 +418,30 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#callAux.
+    def enterCallAux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#callAux.
+    def exitCallAux(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#call_arg.
     def enterCall_arg(self, ctx):
         pass
 
     # Exit a parse tree produced by gijackParser#call_arg.
     def exitCall_arg(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by gijackParser#call_argaux.
+    def enterCall_argaux(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#call_argaux.
+    def exitCall_argaux(self, ctx):
         pass
 
 
