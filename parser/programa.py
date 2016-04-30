@@ -29,7 +29,6 @@ class Programa:
 
         #Para constantes
 
-
     def asignacion(self, variable):
         otroId = self.varIds.pop()
 
@@ -38,7 +37,7 @@ class Programa:
 
         if var1["tipo"] != var2["tipo"]:
             raise Exception("ERROR: %s %s  la asignacion de tipos no es valida" %(
-               var1["tipo"], var2["tipo"] 
+               var1["tipo"], var2["tipo"]
             ))
 
         cuad=Cuadruplo("=",var2['id'],'_',var1['id'])
@@ -46,7 +45,7 @@ class Programa:
 
     def lectura(self, variable):
         var1 = self.tabla.buscar_variable(variable)
-        
+
         cuad=Cuadruplo("read",'_','_',var1['id'])
         self.estatutos.append(cuad)
 
@@ -101,14 +100,14 @@ class Programa:
     def talvez(self):
         cuad = Cuadruplo("goto",'_','_','_')
         self.estatutos.append(cuad)
-        
+
         cont = self.saltos.pop()
         cuad = self.estatutos[cont]
         cuad.direccion2 = str(len(self.estatutos))
 
         self.saltos.append(len(self.estatutos)-1)
-       
-    #rellana los saltos de los if pendientes.     
+
+    #rellana los saltos de los if pendientes.
     def pudieras(self):
         for i in range(self.ifelsecount):
             cont = self.saltos.pop()
@@ -160,7 +159,7 @@ class Programa:
         if var["tipo"] != "bool":
             raise Exception("ERROR:  " )
 
-       
+
         verdadero=self.saltos.pop()
 
         cuad = Cuadruplo("gotot",var['id'],verdadero,'_')
@@ -181,7 +180,7 @@ class Programa:
 
         cuad =Cuadruplo('','','','')
         self.estatutos.append(cuad)
-        
+
 
     def otra(self):
         cuad = self.estatutos.pop()
@@ -189,7 +188,7 @@ class Programa:
         while cuad.direccion1 != '':
             self.cuadruplosFor.append(cuad)
             cuad = self.estatutos.pop()
-    
+
     def vez(self):
         while self.cuadruplosFor:
             self.estatutos.append(self.cuadruplosFor.pop())
@@ -211,11 +210,11 @@ class Programa:
         self.tabla.agregar_funcion("main",tipo,len(self.estatutos))
         cuad=self.estatutos[0]
         cuad.direccion2=str(len(self.estatutos))
-    
+
     def regresafuncion(self):
         cuad =Cuadruplo("endfunc",'_','_','_')
         self.estatutos.append(cuad)
-    
+
     def retornar(self):
         respuesta=self.varIds.pop()
         var = self.tabla.buscar_variable(respuesta)
@@ -238,14 +237,14 @@ class Programa:
 
         if var["tipo"] != par["tipo"]:
             raise Exception("ERROR: %s %s  la asignacion de parametros de tipos no es valida" %(
-               var["tipo"], par["tipo"] 
+               var["tipo"], par["tipo"]
             ))
         cuad =Cuadruplo("param",var["id"],'_',par["id"])
         self.estatutos.append(cuad)
         self.paramcount+=1
 
     def argumentar(self,nombre,tipo):
-        var=self.tabla.agregar_variable(nombre,tipo)
+        var = self.tabla.agregar_variable(nombre,tipo)
         self.tabla.agregar_parametro(var)
 
     def declarar_funcion(self, nombre, tipo):
@@ -278,7 +277,7 @@ class Programa:
 
             for i, estatuto in enumerate(self.estatutos):
                 f.write(estatuto.toString())
-                f.write("\n")            
-    
+                f.write("\n")
+
     def add_var(self, id):
         self.varIds.append(id)

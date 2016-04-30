@@ -28,25 +28,25 @@ forAux3:asignacion PAREN_RIGHT {self.programa2.otra()};
 
 whileLoop: whileAux whileAux2 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.viendo()} ;
 
-whileAux: TK_WHILE {self.programa2.mientras()} ; 
+whileAux: TK_WHILE {self.programa2.mientras()} ;
 
 whileAux2: PAREN_LEFT expresion PAREN_RIGHT {self.programa2.siga()} ;
 
 doLoop: doAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT TK_WHILE PAREN_LEFT expresion PAREN_RIGHT DELIMITER {self.programa2.tucara()} ;
 
-doAux: TK_DO {self.programa2.mientras()} ; 
+doAux: TK_DO {self.programa2.mientras()} ;
 
 ciclos: (whileLoop | doLoop | forLoop) ;
 
-condicion: ifCond elseifCond* elseCond? {self.programa2.pudieras()} ; 
+condicion: ifCond elseifCond* elseCond? {self.programa2.pudieras()} ;
 
 ifCond: ifAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT ;
 
-ifAux: TK_IF PAREN_LEFT expresion PAREN_RIGHT {self.programa2.si()}; 
+ifAux: TK_IF PAREN_LEFT expresion PAREN_RIGHT {self.programa2.si()};
 
 elseCond: elseAux CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT;
 
-elseAux: TK_ELSE {self.programa2.talvez()};  
+elseAux: TK_ELSE {self.programa2.talvez()};
 
 elseifCond: elseAux ifCond {self.programa2.comprender()};
 
@@ -56,15 +56,15 @@ variable
   ;
 
 imprimir
-  : TK_PRINT PAREN_LEFT expresion PAREN_RIGHT DELIMITER {self.programa2.imprimir()}; 
+  : TK_PRINT PAREN_LEFT expresion PAREN_RIGHT DELIMITER {self.programa2.imprimir()};
 
 tipo returns [String varTipo]
   : var=('bool'| 'string' | 'int' | 'float' ) {$varTipo=$var.text};
 
 argumentos: (arguAux (COMMA arguAux)* )? ;
 
-arguAux:varTipo=tipo varId=simple_id {self.programa2.argumentar($varId.text, $varTipo.text)}
-;
+arguAux
+  : varTipo=tipo varId=simple_id {self.programa2.argumentar($varId.text, $varTipo.text)};
 
 funcion: funcionAux PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.regresafuncion()};
 
@@ -84,7 +84,7 @@ rel_op returns [String op]
 : var=('and' | 'or' | '&&' | '||') {$op=$var.text};
 
 mult_op returns [String op]
-: var=('*' | '%' | '/' ) {$op=$var.text}; 
+  : var=('*' | '%' | '/' ) {$op=$var.text};
 
 add_op returns [String op]
   : var=('+' | '-') {$op=$var.text};
@@ -93,27 +93,27 @@ neg_op returns [String op]
 : var=('not' | '!') {$op=$var.text};
 
 expresion
-  : exp 
+  : exp
   | op=rel_op expresion {self.programa2.aritmetica($op.text)}
   ;
 
 exp
-  : e 
+  : e
   | e op=comp_op e {self.programa2.aritmetica($op.text)}
   ;
 
 e
-  : term 
+  : term
   | term op=add_op e {self.programa2.aritmetica($op.text)}
   ;
 
 term
-  : fact 
+  : fact
   | fact op=mult_op term {self.programa2.aritmetica($op.text)}
   ;
 
 fact
-  : ( PAREN_LEFT expresion PAREN_RIGHT | f) 
+  : ( PAREN_LEFT expresion PAREN_RIGHT | f)
   | neg_op ( PAREN_LEFT expresion PAREN_RIGHT | f) {self.programa2.negacion()}
   ;
 
@@ -123,7 +123,7 @@ f
   | func_call
   ;
 
-lectura: TK_READ PAREN_LEFT varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text)}; 
+lectura: TK_READ PAREN_LEFT varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text)};
 
 func_call: callAux PAREN_LEFT call_arg PAREN_RIGHT {self.programa2.gosubrut()};
 

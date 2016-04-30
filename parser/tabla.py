@@ -16,26 +16,22 @@ class Tabla():
             return self.traer_contexto()[nombre]
         except KeyError:
             try:
-                return self.variables["constantes"][nombre]
-            
+                return self.variables["globales"][nombre]
             except:
-
                 raise Exception("ERROR: Variable %s no definida" % nombre)
 
     def traer_contexto(self):
         if not self.contexto in self.variables:
             self.variables[self.contexto] = {}
-    
+
         return self.variables[self.contexto]
-
-
 
     def agregar_variable(self, variable, tipo):
         if variable in self.traer_contexto().keys():
             raise Exception('Variable ya existe: ' + variable)
 
         var = {
-            'nombre': variable, 
+            'nombre': variable,
             'tipo': tipo,
             'id': self.pedir_id(tipo)
         }
@@ -60,21 +56,20 @@ class Tabla():
         if funcion in self.funciones.keys():
             raise Exception('Funcion ya existe: '+ funcion)
 
+        self.contexto=funcion
+
         if tipo:
-            var = self.agregar_constante(funcion,tipo,False)
+            var = self.agregar_constante(funcion, tipo)
         else:
             var = None
 
         self.funciones[funcion] = {
-            'contador':contador,
+            'contador': contador,
             'variable': var,
             'parametros':[],
             'tipo':tipo,
             'id': len(self.funciones.keys())
         }
-
-        self.contexto=funcion
-
 
     def buscar_funcion(self, funcion):
         try:
@@ -87,18 +82,23 @@ class Tabla():
             print nombre,var["tipo"]
 
     def agregar_constante(self, constante, tipo, add=True):
-        contexto= self.contexto
-        self.contexto="constantes"
+        if not "globales" in self.variables:
+            self.variables["globales"] = {}
 
-        if constante in self.traer_contexto().keys():
-            return self.traer_contexto()[constante]
-        
-        var = self.agregar_variable(constante, tipo)
-        var["add"] = add
+        if constante in self.variables["globales"]:
+            return self.variables["globales"][constante]
+
+        var = {
+            'nombre': constante,
+            'tipo': tipo,
+            'id': self.pedir_id(tipo),
+            'add': add
+        }
+
+        self.variables["globales"][constante] = var
         self.constantes[constante] = var
-        self.contexto=contexto
 
-        return self.constantes[constante]
+        return var
 
     def print_constante(self):
         for nombre,var in self.constantes.items():
@@ -115,6 +115,5 @@ class Tabla():
     def obtener_parametro(self,contador,contexto):
         if contador >= len(self.funciones[contexto]["parametros"]):
             raise Exception("Cantidad incorrecta de argumentos")
-        
-        return self.funciones[contexto]["parametros"][contador]
 
+        return self.funciones[contexto]["parametros"][contador]

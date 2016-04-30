@@ -1,33 +1,28 @@
-gen int 18
+gen int 8
 gen float 0
-gen bool 0
-gen string 6
-const int i3 callMeBeepMe
-const string s1 "meep"
-const string s2 "fuck you"
-const int i15 3
-const int i8 1
-const int i2 0
-const string s0 "yas"
-const int i10 2
-const int i16 4
-const int i14 103
+gen bool 1
+gen string 0
+const int i3 1
 const int i7 main
-const int i0 callMeBeepMetoo
-const string s3 "papalord"
-goto _ 9 _
-print s0 _ _
-return i2 _ i0
-endfunc _ _ _
-print s1 _ _
+const int i0 fibo
+const int i2 2
+goto _ 16 _
+< i1 i2 b0
+gotof b0 5 _
+return i3 _ i0
+goto _ 15 _
 era 0 _ _
-gosub 0 _ _
-return i0 _ i0
-endfunc _ _ _
-print s2 _ _
-era 1 _ _
-param i9 _ i4
-+ i10 i10 i11
-param i11 _ i5
+- i1 i3 i4
+param i4 _ i1
 gosub 1 _ _
-+ i10 i10 i12
+era 0 _ _
+- i1 i2 i5
+param i5 _ i1
+gosub 1 _ _
++ i0 i0 i6
+return i6 _ i0
+endfunc _ _ _
+era 0 _ _
+param i2 _ i1
+gosub 1 _ _
+print i0 _ _

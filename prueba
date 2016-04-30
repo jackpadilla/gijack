@@ -1,6 +1,6 @@
 program meep;
 funcion int fibo(int n)
-{	
+{
 	if(n<2){
 	return 1;
 	}
@@ -13,9 +13,9 @@ funcion int fibo(int n)
 
 
 int main
-{ 
-	print(fibo(2))
-	
+{
+	print(fibo(2));
 
-	
+
+
 }
