@@ -14,9 +14,9 @@ retorno: 'return' expresion DELIMITER {self.programa2.retornar()};
 
 proceso: (asignacion | condicion | ciclos | imprimir | lectura | (func_call DELIMITER) | variable |retorno ) ;
 
-lista: expresion (COMMA expresion)* ;
+lista: expresion;
 
-asignacion: varId=simple_id ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)};
+asignacion: (varId=simple_id|varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT) ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)};
 
 forLoop:forAux forAux2 forAux3 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT{self.programa2.vez()};
 
@@ -53,6 +53,19 @@ elseifCond: elseAux ifCond {self.programa2.comprender()};
 variable
   : varTipo=tipo varId=simple_id DELIMITER {self.tabla.agregar_variable($varId.text, $varTipo.text)}
   | varTipo=tipo varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.agregar_variable($varId.text, $varTipo.text)}
+  | vdim DELIMITER
+  ;
+
+simple_id returns [String varId]
+  : var=ID {$varId=$var.text}
+  ;
+
+vdim
+  : varTipo=tipo varId=vdimAux SQUARE_BRACKET_LEFT INT SQUARE_BRACKET_RIGHT {self.tabla.agregar_variable($varId.text, $varTipo.text)}
+  ;
+
+vdimAux returns [String varId]
+  : var=ID {$varId=$var.text}
   ;
 
 imprimir
@@ -64,7 +77,9 @@ tipo returns [String varTipo]
 argumentos: (arguAux (COMMA arguAux)* )? ;
 
 arguAux
-  : varTipo=tipo varId=simple_id {self.programa2.argumentar($varId.text, $varTipo.text)};
+  : varTipo=tipo varId=simple_id {self.programa2.argumentar($varId.text, $varTipo.text)}
+  | varTipo=tipo varId=vdimAux SQUARE_BRACKET_LEFT SQUARE_BRACKET_RIGHT {self.programa2.argumentar($varId.text, $varTipo.text)}
+  ;
 
 funcion: funcionAux PAREN_LEFT argumentos PAREN_RIGHT CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT {self.programa2.regresafuncion()};
 
@@ -120,6 +135,7 @@ fact
 f
   : varId=const {self.programa2.add_var($varId.text)}
   | varId=simple_id {self.programa2.add_var($varId.text)}
+  | varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.programa2.add_var($varId.text)}
   | func_call
   ;
 
@@ -133,10 +149,6 @@ call_arg: ( call_argaux (COMMA call_argaux )*)? ;
 
 call_argaux: expresion {self.programa2.generarPam()};
 
-simple_id returns [String varId]
-  : var=ID {$varId=$var.text}
-  | var=ID SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {$varId=$var.text}
-  ;
 
 // ---
 // TOKENS
