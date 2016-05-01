@@ -265,7 +265,9 @@ class Programa:
             print "[%d] %s" % (i, estatuto.toString())
 
     def escribo(self, nombre):
-        with open(nombre,'w') as f:
+        filename = nombre.split(".")[0] + '.jack'
+
+        with open(filename,'w') as f:
             for tipo, cantidad in self.tabla.memoria.items():
                 f.write("gen %s %d" % (tipo, cantidad))
                 f.write("\n")
