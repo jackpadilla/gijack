@@ -37,74 +37,74 @@ class Meep:
 
         if instruccion == 'print':
             self.imprimir(direccion1)
-            
+
         elif instruccion == '+':
             self.sumar(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '-':
             self.restar(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '*':
             self.multiplicar(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '/':
             self.dividir(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '%':
             self.modear(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '==':
             self.igualque(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '>=':
             self.mayoroigual(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '<=':
             self.menoroigual(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '>':
             self.mayorque(direccion1,direccion2,resultado)
-        
+
         elif instruccion == '<':
             self.menorque(direccion1,direccion2,resultado)
-        
+
         elif instruccion == 'and' or instruccion == '&&':
             self.y(direccion1,direccion2,resultado)
-        
+
         elif instruccion == 'or' or instruccion == '||':
             self.o(direccion1,direccion2,resultado)
-        
-        elif instruccion == '!=': 
+
+        elif instruccion == '!=':
             self.noigual(direccion1,direccion2,resultado)
-        
-        elif instruccion == '!' or instruccion == 'not': 
+
+        elif instruccion == '!' or instruccion == 'not':
             self.negar(direccion1,resultado)
 
-        elif instruccion == '=': 
+        elif instruccion == '=':
             self.igual(direccion1,resultado)
 
-        elif instruccion == 'gotof': 
+        elif instruccion == 'gotof':
             self.irf(direccion1,direccion2)
-        
-        elif instruccion == 'goto': 
+
+        elif instruccion == 'goto':
             self.ir(direccion2)
-        
-        elif instruccion == 'gotot': 
+
+        elif instruccion == 'gotot':
             self.irt(direccion1,direccion2)
-        
-        elif instruccion == 'return': 
+
+        elif instruccion == 'return':
             self.retorno(direccion1,resultado)
 
-        elif instruccion == 'endfunc': 
+        elif instruccion == 'endfunc':
             self.finfun()
 
-        elif instruccion == 'era': 
+        elif instruccion == 'era':
             self.era(direccion1)
 
-        elif instruccion == 'gosub': 
+        elif instruccion == 'gosub':
             self.irsub(direccion1)
 
-        elif instruccion == 'param': 
+        elif instruccion == 'param':
             self.param(direccion1,resultado)
 
         self.contador += 1
@@ -112,7 +112,7 @@ class Meep:
     def imprimir(self, direccion):
         valor = self.memoria.obtenerVariable(direccion)
         print valor
-       
+
     def sumar(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) + self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
@@ -120,51 +120,51 @@ class Meep:
     def restar(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) - self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def dividir(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) / self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def multiplicar(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) * self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def modear(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) % self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def mayorque(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) > self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def menorque(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) < self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def igualque(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) == self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def mayoroigual(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) >= self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def menoroigual(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) <= self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def noigual(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) != self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def y(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) and self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def o(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) or self.memoria.obtenerVariable(dir2)
         self.memoria.ponerValor(res, valor)
-    
+
     def negar(self,dir1,res):
         valor = not self.memoria.obtenerVariable(dir1)
         self.memoria.ponerValor(res, valor)
@@ -177,35 +177,29 @@ class Meep:
         valor = self.memoria.obtenerVariable(dir1)
         if not valor:
             self.contador=int(res)-1
-       
 
     def irt(self,dir1,res):
         valor = self.memoria.obtenerVariable(dir1)
         if valor:
             self.contador=int(res)-1
-       
 
     def ir(self,res):
         self.contador=int(res)-1
-    
+
     def retorno(self,dir1,res):
         valor = self.memoria.obtenerVariable(dir1)
         self.memoria.ponerValor(res, valor)
+
     def era(self,dir1):
-        print "era"
+        pass
 
     def irsub(self,dir1):
         self.cont2.append(self.contador)
         self.contador=int(dir1)-1
-        
 
     def finfun(self):
         self.contador=self.cont2.pop()
-        
 
     def param(self,dir1,res):
         valor = self.memoria.obtenerVariable(dir1)
         self.memoria.ponerValor(res, valor)
-       
-
-

@@ -9,8 +9,8 @@ from antlr4 import *
 
 def main(argv):
     tabla = Tabla()
-    programa1 = Programa(tabla, "meep")
     inputfile = FileStream(argv[1])
+    programa1 = Programa(tabla, "meep")
     lexer = gijackLexer(inputfile)
     stream = CommonTokenStream(lexer)
     parser = Funk(stream, tabla, programa1)
@@ -25,8 +25,7 @@ def main(argv):
     #tabla.print_funcion()
     #tabla.print_constante()
     programa1.dump()
-    programa1.escribo()
-
+    programa1.escribo(argv[1])
 
 if __name__ == '__main__':
     main(sys.argv)

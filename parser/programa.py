@@ -264,8 +264,8 @@ class Programa:
         for i, estatuto in enumerate(self.estatutos):
             print "[%d] %s" % (i, estatuto.toString())
 
-    def escribo(self):
-        with open('cuadruplos','w') as f:
+    def escribo(self, nombre):
+        with open(nombre,'w') as f:
             for tipo, cantidad in self.tabla.memoria.items():
                 f.write("gen %s %d" % (tipo, cantidad))
                 f.write("\n")

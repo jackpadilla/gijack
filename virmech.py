@@ -4,7 +4,7 @@ from vm.meep import Meep
 
 def main(argv):
     meep = Meep()
-    meep.read_meeps("cuadruplos")
+    meep.read_meeps(argv[1])
     meep.while_my_guitar_gently_meeps()
 
 if __name__ == '__main__':

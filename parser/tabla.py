@@ -59,7 +59,7 @@ class Tabla():
         self.contexto=funcion
 
         if tipo:
-            var = self.agregar_constante(funcion, tipo)
+            var = self.agregar_constante(funcion, tipo, False)
         else:
             var = None
 

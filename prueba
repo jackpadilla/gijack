@@ -1,21 +1,19 @@
-program meep;
-funcion int fibo(int n)
-{
-	if(n<2){
-	return 1;
-	}
-	else{
-	return fibo(n-1)+fibo(n-2);
-
-	}
-
-}
-
-
-int main
-{
-	print(fibo(2));
-
-
-
-}
+gen int 6
+gen float 0
+gen bool 1
+gen string 0
+const int i2 1
+const int i1 0
+const int i5 10
+goto _ 9 _
+print i0 _ _
+> i0 i1 b0
+gotof b0 8 _
+era 0 _ _
+- i0 i2 i3
+param i3 _ i0
+gosub 1 _ _
+endfunc _ _ _
+era 0 _ _
+param i5 _ i0
+gosub 1 _ _
