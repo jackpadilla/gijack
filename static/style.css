@@ -1,0 +1,49 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+  width: 100%;
+  height: 150px;
+  position: relative;
+}
+
+.title {
+  margin-left: 5px;
+  position: absolute;
+  top: 0;
+}
+
+.content {
+  width: 100%;
+  height: 82%;
+}
+
+.tab {
+  margin-bottom: 10px;
+}
+
+.tab span {
+  padding: 10px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  margin-left: 5px;
+}
+
+.section {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.section textarea {
+  width: 100%;
+  height: 100%;
+}
+
+#blocklyDiv {
+  height: 100%;
+}
