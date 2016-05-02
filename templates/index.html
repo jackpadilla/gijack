@@ -95,8 +95,9 @@
 
 <script>
 function updateCode() {
+  var header = "program meep;\n"
   var code = Blockly.gijack.workspaceToCode(workspace);
-  document.getElementById('textarea').value = code;
+  document.getElementById('textarea').value = header + code;
 }
 
 function autoUpdate() {
