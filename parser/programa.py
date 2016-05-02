@@ -51,7 +51,7 @@ class Programa:
             cuad=Cuadruplo("read",var2['id'],'_',var1['id'])
         else :
             cuad=Cuadruplo("read",'_','_',var1['id'])
-        
+
         self.estatutos.append(cuad)
 
     def negacion(self):
@@ -287,6 +287,25 @@ class Programa:
             for i, estatuto in enumerate(self.estatutos):
                 f.write(estatuto.toString())
                 f.write("\n")
+
+    def line_dump(self):
+        lines = []
+
+        for tipo, cantidad in self.tabla.memoria.items():
+            lines.append("gen %s %d" % (tipo, cantidad))
+
+        for nombre,constante in self.tabla.constantes.items():
+            if constante["add"]:
+                lines.append("const %s %s %s" % (constante["tipo"], constante["id"], nombre))
+
+        for funcion, datos in self.tabla.funciones.items():
+            if funcion != 'main' and datos['variable']:
+                lines.append("func %s %s" % (datos['variable']['tipo'], datos['variable']['id']))
+
+        for i, estatuto in enumerate(self.estatutos):
+            lines.append(estatuto.toString())
+
+        return lines
 
     def debug(self):
         cuad = Cuadruplo("debug",'_','_','_')

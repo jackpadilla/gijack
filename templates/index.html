@@ -27,7 +27,10 @@
 
   <div class="section">
     <div class="tab"><span>Code</span></div>
-    <textarea id="textarea" rows="4" cols="50"></textarea>
+    <form action="/compile" method="POST">
+      <textarea id="textarea" rows="4" cols="50" name="code"></textarea>
+      <button>Compilar</button>
+    </form>
   </div>
 </div>
 
