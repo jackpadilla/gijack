@@ -1,11 +1,11 @@
 import re
-from memoria import Memoria
+from manejador_memoria import ManejadorMemoria
 
 class Meep:
     def __init__(self):
         self.estatutos = []
         self.contador = 0
-        self.memoria = Memoria()
+        self.memoria = ManejadorMemoria()
         self.cont2=[]
 
     def read_meeps(self, filename):
@@ -13,7 +13,7 @@ class Meep:
             for linea in archivo.readlines():
                 estatuto=linea.strip().split(" ")
                 if estatuto[0] == "gen":
-                    self.memoria.llenarMemoria(estatuto[1], estatuto[2])
+                    self.memoria.agregar_detalle(estatuto[1], estatuto[2])
                 elif estatuto[0] == "const":
                     if estatuto[1] == "string":
                         valor = re.search(r'\".*\"', linea).group()
@@ -23,6 +23,7 @@ class Meep:
                 else:
                     self.estatutos.append(estatuto)
 
+        self.memoria.primer_mem()
 
     def while_my_guitar_gently_meeps(self):
         while self.contador < len(self.estatutos):
@@ -196,9 +197,11 @@ class Meep:
     def irsub(self,dir1):
         self.cont2.append(self.contador)
         self.contador=int(dir1)-1
+        self.memoria.nueva_mem()
 
     def finfun(self):
         self.contador=self.cont2.pop()
+        self.memoria.termina_mem()
 
     def param(self,dir1,res):
         valor = self.memoria.obtenerVariable(dir1)
