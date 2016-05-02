@@ -139,7 +139,7 @@ f
   | func_call
   ;
 
-lectura: TK_READ PAREN_LEFT varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text)};
+lectura: TK_READ PAREN_LEFT (varTxt=STRING COMMA)? varId=simple_id PAREN_RIGHT DELIMITER {self.programa2.lectura($varId.text,$varTxt.text)};
 
 func_call: callAux PAREN_LEFT call_arg PAREN_RIGHT {self.programa2.gosubrut()};
 

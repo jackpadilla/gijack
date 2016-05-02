@@ -4,8 +4,14 @@ int main {
   
   string escribo;
   escribo="";
-  print("aqui escribo");
   
+  read(escribo);
   print(escribo);
+
+  int x;
+  read("dame x", x);
+  int y;
+  read("dame y ", y);
+  print(x+y);
 
 }

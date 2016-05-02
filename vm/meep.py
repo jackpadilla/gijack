@@ -107,6 +107,8 @@ class Meep:
 
         elif instruccion == 'param':
             self.param(direccion1,resultado)
+        elif instruccion == 'read':
+            self.leer(direccion1,resultado)
 
         self.contador += 1
 
@@ -206,3 +208,19 @@ class Meep:
     def param(self,dir1,res):
         valor = self.memoria.obtenerVariable(dir1)
         self.memoria.ponerValor(res, valor)
+
+    def leer(self,dir1,res):
+        if dir1 == '_':
+            valor=raw_input('Enter your input:')
+        else:
+            valor=raw_input(self.memoria.obtenerVariable(dir1))
+
+        if res[0] == 'i':
+            valorcast=int(valor)
+        elif res[0] == 'f':
+            valorcast=float(valor)
+        elif res[0] == 's':
+            valorcast=valor
+        elif res[0] == 'b':
+            valorcast=bool(valor)
+        self.memoria.ponerValor(res, valorcast)

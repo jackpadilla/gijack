@@ -43,10 +43,15 @@ class Programa:
         cuad=Cuadruplo("=",var2['id'],'_',var1['id'])
         self.estatutos.append(cuad)
 
-    def lectura(self, variable):
+    def lectura(self, variable,texto):
         var1 = self.tabla.buscar_variable(variable)
 
-        cuad=Cuadruplo("read",'_','_',var1['id'])
+        if texto :
+            var2 = self.tabla.agregar_constante(texto,"string")
+            cuad=Cuadruplo("read",var2['id'],'_',var1['id'])
+        else :
+            cuad=Cuadruplo("read",'_','_',var1['id'])
+        
         self.estatutos.append(cuad)
 
     def negacion(self):
