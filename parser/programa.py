@@ -274,17 +274,23 @@ class Programa:
 
         with open(filename,'w') as f:
             for tipo, cantidad in self.tabla.memoria.items():
-                f.write("gen %s %d" % (tipo, cantidad))
-                f.write("\n")
+                f.write("gen %s %d\n" % (tipo, cantidad))
 
             for nombre,constante in self.tabla.constantes.items():
                 if constante["add"]:
-                    f.write("const %s %s %s" % (constante["tipo"], constante["id"], nombre))
-                    f.write("\n")
+                    f.write("const %s %s %s\n" % (constante["tipo"], constante["id"], nombre))
+
+            for funcion, datos in self.tabla.funciones.items():
+                if funcion != 'main' and datos['variable']:
+                    f.write("func %s %s\n" % (datos['variable']['tipo'], datos['variable']['id']))
 
             for i, estatuto in enumerate(self.estatutos):
                 f.write(estatuto.toString())
                 f.write("\n")
+
+    def debug(self):
+        cuad = Cuadruplo("debug",'_','_','_')
+        self.estatutos.append(cuad)
 
     def add_var(self, id):
         self.varIds.append(id)

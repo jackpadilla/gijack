@@ -67,6 +67,15 @@ class gijackListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by gijackParser#debug.
+    def enterDebug(self, ctx):
+        pass
+
+    # Exit a parse tree produced by gijackParser#debug.
+    def exitDebug(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by gijackParser#lista.
     def enterLista(self, ctx):
         pass

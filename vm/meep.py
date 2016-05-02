@@ -20,6 +20,8 @@ class Meep:
                         self.memoria.crearConstante(estatuto[1],valor,estatuto[2])
                     else:
                         self.memoria.crearConstante(estatuto[1],estatuto[3],estatuto[2])
+                elif estatuto[0] == "func":
+                    self.memoria.crearFuncion(estatuto[1], estatuto[2])
                 else:
                     self.estatutos.append(estatuto)
 
@@ -107,14 +109,18 @@ class Meep:
 
         elif instruccion == 'param':
             self.param(direccion1,resultado)
+
         elif instruccion == 'read':
             self.leer(direccion1,resultado)
+
+        elif instruccion == 'debug':
+            self.debug()
 
         self.contador += 1
 
     def imprimir(self, direccion):
         valor = self.memoria.obtenerVariable(direccion)
-        print valor
+        print valor,
 
     def sumar(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) + self.memoria.obtenerVariable(dir2)
@@ -194,12 +200,11 @@ class Meep:
         self.memoria.ponerValor(res, valor)
 
     def era(self,dir1):
-        pass
+        self.memoria.nueva_mem()
 
     def irsub(self,dir1):
         self.cont2.append(self.contador)
         self.contador=int(dir1)-1
-        self.memoria.nueva_mem()
 
     def finfun(self):
         self.contador=self.cont2.pop()
@@ -224,3 +229,16 @@ class Meep:
         elif res[0] == 'b':
             valorcast=bool(valor)
         self.memoria.ponerValor(res, valorcast)
+
+    def debug(self):
+        opt = 'dbg'
+
+        while opt:
+            opt = raw_input("dbg: ")
+
+            if opt == 'stack':
+                print self.cont2
+            elif opt == 'mem':
+                print self.memoria.dump()
+            else:
+                pass

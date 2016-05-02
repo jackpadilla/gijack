@@ -12,7 +12,19 @@ procesos: proceso+;
 
 retorno: 'return' expresion DELIMITER {self.programa2.retornar()};
 
-proceso: (asignacion | condicion | ciclos | imprimir | lectura | (func_call DELIMITER) | variable |retorno ) ;
+proceso
+  : asignacion
+  | condicion
+  | ciclos
+  | imprimir
+  | lectura
+  | func_call DELIMITER
+  | variable
+  | retorno
+  | debug
+  ;
+
+debug: 'debug' PAREN_LEFT PAREN_RIGHT DELIMITER {self.programa2.debug()};
 
 lista: expresion;
 

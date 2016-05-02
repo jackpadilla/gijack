@@ -21,7 +21,7 @@ int main {
   for(n = 1; n <= 5; n = n+1;)
   {
     respuesta = fibo(n);
-    print("respuesta");
+    print("respuesta: ");
     print(respuesta);
   }
 }

@@ -53,20 +53,6 @@ class Memoria:
         else:
             raise Exception("Error tipo no valido")
 
-    def crearConstante(self,tipo,valor,index):
-        en = int(index[1:])
-
-        if tipo == "int":
-            self.enteros[en] = int(valor)
-        elif tipo == "float":
-            self.flotantes[en] = float(valor)
-        elif tipo == "bool":
-            self.booleanos[en] = valor==".TRUE"
-        elif tipo == "string":
-            self.palabras[en] = valor[1:-1]
-        else:
-            raise Exception("Error tipo no valido")
-
     def ponerValor(self,varid,valor):
         tipo=varid[0]
         direccion=int(varid[1:])
