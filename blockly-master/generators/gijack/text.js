@@ -252,3 +252,13 @@ Blockly.gijack['text_prompt_ext'] = function(block) {
 };
 
 Blockly.gijack['text_prompt'] = Blockly.gijack['text_prompt_ext'];
+
+
+Blockly.gijack['read_file'] = function(block) {
+  var argument0 = Blockly.gijack.valueToCode(block, 'read',
+      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  var value_read = Blockly.gijack.valueToCode(block, 'read', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble gijack into code variable.
+  var code = 'read (' + argument0 + ')'+ ';\n';
+  return code;
+};

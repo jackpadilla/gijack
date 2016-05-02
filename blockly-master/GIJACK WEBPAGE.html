@@ -45,6 +45,9 @@ function myUpdateFunction(event) {
 <script src="generators/gijack/text.js"></script>
 <script src="generators/gijack/variables.js"></script>
 <script src="generators/gijack/logic.js"></script>
+<script src="generators/gijack/loops.js"></script>
+<script src="generators/gijack/procedures.js"></script>
+<script src="generators/gijack/lists.js"></script>
 
 
 <!-- messages for the user's language (in this case English) -->
@@ -67,11 +70,9 @@ function myUpdateFunction(event) {
   <sep gap="32"></sep>
 
   <category name="Ciclos" colour="160">
-  	<block type="controls_repeat_ext"></block>
   	<block type="controls_whileUntil"></block>
   	<block type="controls_for"></block>
-  	<block type="controls_forEach"></block>
-
+    <block type="ciclos_dowhile"></block>
   </category>
   <sep gap="32"></sep>
 
@@ -87,33 +88,32 @@ function myUpdateFunction(event) {
   <category name="Variables" colour="240">
   	<block type="declare_var"></block>
     <block type="use_var"></block>
+    <block type="assign_var"></block>
+    <block type="varis_item"></block>
 
   </category>
   <sep gap="32"></sep>
 
-  <category name="Funciones" colour="280" custom="PROCEDURE">
+  <category name="Funciones" colour="280">
   	<block type="procedures_defreturn"></block>
-  	<block type="procedures_callreturn"></block>
-   	<block type="procedures_ifreturn"></block>
+  	<block type="procedures_defnoreturn"></block>
+    <block type="procedures_expresion"></block>
+    <block type="procedures_express"></block>
+
   </category>
   <sep gap="32"></sep>
 
   <category name="Strings" colour="320">
   	<block type="text"></block>
-  	<block type="text_join"></block>
-  	<block type="text_append"></block>
-  	<block type="text_length"></block>
-  	<block type="text_isEmpty"></block>
   	<block type="text_print"></block>
-  	<block type="text_prompt_ext"></block>
+    <block type="read_file"></block>
+
   </category>
   <sep gap="32"></sep>
 
   <category name="Listas" colour="360">
   	<block type="lists_create_empty"></block>
-  	<block type="lists_create_with"></block>
-   	<block type="lists_repeat"></block>
-   	<block type="lists_setIndex"></block> 
+  	<block type="lists_create_with"></block> 
   </category>
 
 </xml>

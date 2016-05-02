@@ -281,3 +281,19 @@ Blockly.Blocks['controls_flow_statements'] = {
   LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
       'controls_for', 'controls_whileUntil']
 };
+
+
+//do while block
+Blockly.Blocks['ciclos_dowhile'] = {
+  init: function() {
+    this.appendStatementInput("do")
+        .setCheck(null)
+        .appendField("Do");
+    this.appendValueInput("while")
+        .setCheck(null)
+        .appendField("while");
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

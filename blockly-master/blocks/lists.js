@@ -711,3 +711,4 @@ Blockly.Blocks['lists_split'] = {
     this.updateType_(xmlElement.getAttribute('mode'));
   }
 };
+

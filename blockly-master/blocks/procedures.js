@@ -799,3 +799,28 @@ Blockly.Blocks['procedures_ifreturn'] = {
    */
   FUNCTION_TYPES: ['procedures_defnoreturn', 'procedures_defreturn']
 };
+
+Blockly.Blocks['procedures_expresion'] = {
+  init: function() {
+    this.appendStatementInput("nom")
+        .setCheck(null)
+        .appendField("expression");
+    this.setOutput(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['procedures_express'] = {
+  init: function() {
+    this.appendStatementInput("NAME")
+        .setCheck(null)
+        .appendField("expression");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

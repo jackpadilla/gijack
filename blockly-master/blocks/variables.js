@@ -100,14 +100,18 @@ Blockly.Blocks['variables_set'] = {
 };
 
 //Todos los nuevos bloques
+
+
 Blockly.Blocks['declare_var'] = {
   init: function() {
     this.appendValueInput("variables")
         .setCheck(null)
-        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["string", "string"], ["bool", "bool"]]), "varType")
-        .appendField(new Blockly.FieldTextInput(""), "varName")
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["string", "string"], ["float", "float"], ["bool", "bool"]]), "varType")
+        .appendField(new Blockly.FieldTextInput("varName"), "NAME")
         .appendField("=");
-    this.setColour(210);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -120,6 +124,34 @@ Blockly.Blocks['use_var'] = {
         .appendField(new Blockly.FieldTextInput("item"), "var");
     this.setOutput(true, null);
     this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
+Blockly.Blocks['assign_var'] = {
+  init: function() {
+    this.appendValueInput("assign")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("item"), "var")
+        .appendField("=");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['varis_item'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("item"), "item");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

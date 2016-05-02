@@ -33,29 +33,38 @@ Blockly.gijack['declare_var'] = function(block) {
   var argument0 = Blockly.gijack.valueToCode(block, 'variables',
       Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
   var dropdown_vartype = block.getFieldValue('varType');
-  var text_varname = block.getFieldValue('varName');
+  var text_name = block.getFieldValue('NAME');
   var value_variables = Blockly.gijack.valueToCode(block, 'variables', Blockly.gijack.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-
-  var code = dropdown_vartype + ' ' + text_varname + ' = '+ argument0 + ';\n';
+  // TODO: Assemble gijack into code variable.
+  var code = dropdown_vartype + ' ' + text_name + ' = '+ argument0 + ';\n';
   return code;
 };
 
 Blockly.gijack['use_var'] = function(block) {
   var text_var = block.getFieldValue('var');
-  // TODO: Assemble JavaScript into code variable.
+  // TODO: Assemble gijack into code variable.
   var code = text_var;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.gijack.ORDER_NONE];
 };
 
-/*Blockly.gijack['declare_int'] = function(block) {
-  var argument0 = Blockly.gijack.valueToCode(block, 'NUM',
-      Blockly.gijack.ORDER_ASSIGNMENT) || '0';	
-  var text_varname = block.getFieldValue('varName');
-  var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
+
+
+Blockly.gijack['assign_var'] = function(block) {
+  var argument0 = Blockly.gijack.valueToCode(block, 'assign',
+      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  var text_var = block.getFieldValue('var');
+  var value_assign = Blockly.gijack.valueToCode(block, 'assign', Blockly.gijack.ORDER_ATOMIC);
   // TODO: Assemble gijack into code variable.
-  var code = 'int ' + text_varname +'= ' + argument0;
+  var code = text_var + ' = ' + argument0 + ';\n';
   return code;
 };
-*/
+
+
+Blockly.gijack['varis_item'] = function(block) {
+  var text_item = block.getFieldValue('item');
+
+  // TODO: Assemble gijack into code variable.
+  var code = text_item;
+  return code;
+};

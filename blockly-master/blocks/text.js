@@ -669,3 +669,16 @@ Blockly.Blocks['text_prompt'] = {
   mutationToDom: Blockly.Blocks['text_prompt_ext'].mutationToDom,
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation
 };
+
+Blockly.Blocks['read_file'] = {
+  init: function() {
+    this.appendValueInput("read")
+        .setCheck(null)
+        .appendField("read file =");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
