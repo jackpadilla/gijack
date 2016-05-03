@@ -670,11 +670,15 @@ Blockly.Blocks['text_prompt'] = {
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation
 };
 
-Blockly.Blocks['read_file'] = {
+Blockly.Blocks['procedures_input'] = {
   init: function() {
     this.appendValueInput("read")
         .setCheck(null)
-        .appendField("read file =");
+        .appendField("leer");
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("valor");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);

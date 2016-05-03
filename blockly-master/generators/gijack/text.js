@@ -30,8 +30,10 @@ goog.require('Blockly.gijack');
 
 
 Blockly.gijack['text'] = function(block) {
+  var text = block.getFieldValue('TEXT'); 
   // Text value.
-  var code = Blockly.gijack.quote_(block.getFieldValue('TEXT'));
+  var code = '"' + text + '"';
+  // Blockly.gijack.quo(block.getFieldValue('TEXT'));
   return [code, Blockly.gijack.ORDER_ATOMIC];
 };
 
@@ -230,7 +232,7 @@ Blockly.gijack['text_print'] = function(block) {
   // Print statement.
   var argument0 = Blockly.gijack.valueToCode(block, 'TEXT',
       Blockly.gijack.ORDER_NONE) || '\'\'';
-  return 'window.alert(' + argument0 + ');\n';
+  return 'print(' + argument0 + ');\n';
 };
 
 Blockly.gijack['text_prompt_ext'] = function(block) {
@@ -254,11 +256,18 @@ Blockly.gijack['text_prompt_ext'] = function(block) {
 Blockly.gijack['text_prompt'] = Blockly.gijack['text_prompt_ext'];
 
 
-Blockly.gijack['read_file'] = function(block) {
-  var argument0 = Blockly.gijack.valueToCode(block, 'read',
-      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+
+
+Blockly.gijack['procedures_input'] = function(block) {
   var value_read = Blockly.gijack.valueToCode(block, 'read', Blockly.gijack.ORDER_ATOMIC);
+  var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
   // TODO: Assemble gijack into code variable.
-  var code = 'read (' + argument0 + ')'+ ';\n';
+  if(value_read == '""' || value_read == '')
+  {
+    var code = 'read(' + value_name + ');';
+  }
+  else{
+    var code = 'read(' + value_read + ',' + value_name + ');';
+  }
   return code;
 };
