@@ -160,11 +160,22 @@ Blockly.gijack['ciclos_dowhile'] = function(block) {
   var value_while = Blockly.gijack.valueToCode(block, 'while',
    Blockly.gijack.ORDER_ATOMIC);
 
-  var code = "do {\n" + statements_do + "}\nwhile (" + value_while + ")\n";
+  var code = "do {\n" + statements_do + "}\nwhile (" + value_while + ");\n";
 
   return code;
 };
 
+Blockly.gijack['for'] = function(block) {
+  var text_i = block.getFieldValue('i');
+  var text_init = block.getFieldValue('init');
+  var text_expression = block.getFieldValue('expression');
+  var text_op = block.getFieldValue('op');
+  var statements_stats = Blockly.gijack.statementToCode(block, 'stats');
+  // TODO: Assemble gijack into code variable.
+  var code = 'for(' + text_i + ' = ' +  text_init + '; ' + text_expression + ';' + text_op 
+      + ';) {\n' + statements_stats + '\n }\n';
+  return code;
+};
 
 
 /*

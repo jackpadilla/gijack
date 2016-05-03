@@ -292,7 +292,32 @@ Blockly.Blocks['ciclos_dowhile'] = {
     this.appendValueInput("while")
         .setCheck(null)
         .appendField("while");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['for'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("for")
+        .appendField(new Blockly.FieldTextInput("i"), "i")
+        .appendField("=")
+        .appendField(new Blockly.FieldTextInput("init"), "init")
+        .appendField(";");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("expression"), "expression")
+        .appendField(";")
+        .appendField(new Blockly.FieldTextInput("default"), "op");
+    this.appendStatementInput("stats")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
