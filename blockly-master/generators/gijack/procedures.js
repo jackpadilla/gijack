@@ -160,3 +160,56 @@ Blockly.gijack['pro_exp'] = function(block) {
   var code = '('+argument0+')';
   return code;
 };
+
+Blockly.gijack['proc_arg'] = function(block) {
+  var dropdown_tipo = block.getFieldValue('tipo');
+  var text_nombre = block.getFieldValue('nombre');
+  var value_arg = Blockly.gijack.valueToCode(block, 'arg', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble gijack into code variable.
+  if(value_arg == '')
+  {
+    var code = dropdown_tipo + ' ' + text_nombre;
+  }
+  else{
+    var code = dropdown_tipo + ' ' + text_nombre + ', ' + value_arg;
+  }
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.gijack.ORDER_NONE];
+};
+
+
+
+Blockly.gijack['proc'] = function(block) {
+  var dropdown_tipo = block.getFieldValue('tipo');
+  var text_nombre = block.getFieldValue('nombre');
+  var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
+  var statements_stats = Blockly.gijack.statementToCode(block, 'stats');
+  // TODO: Assemble gijack into code variable.
+  var code = dropdown_tipo + ' ' + text_nombre + ' (' +value_name + '){\n' + statements_stats + '\n}';
+  return code;
+};
+
+Blockly.gijack['return'] = function(block) {
+  var value_returnval = Blockly.gijack.valueToCode(block, 'returnVal', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble gijack into code variable.
+  var code = 'return ' + value_returnval + ';\n';
+  return code;
+};
+
+Blockly.gijack['func_call'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  var value_return = Blockly.gijack.valueToCode(block, 'return', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble gijack into code variable.
+  var code = text_name + '(' + value_return + ');\n';
+  return code;
+};
+
+Blockly.gijack['func_calls'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  var value_return = Blockly.gijack.valueToCode(block, 'return', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble gijack into code variable.
+  var code = text_name + '(' + value_return + ')';
+
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.gijack.ORDER_NONE];
+};

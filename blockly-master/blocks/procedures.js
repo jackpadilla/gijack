@@ -872,3 +872,71 @@ Blockly.Blocks['pro_exp'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['proc_arg'] = {
+  init: function() {
+    this.appendValueInput("arg")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["bool", "bool"], ["string", "string"]]), "tipo")
+        .appendField(new Blockly.FieldTextInput("nombre"), "nombre");
+    this.setOutput(true, null);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['proc'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("funcion")
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["bool", "bool"], ["string", "string"]]), "tipo")
+        .appendField(new Blockly.FieldTextInput("nombre"), "nombre");
+    this.appendValueInput("NAME")
+        .setCheck(null);
+    this.appendDummyInput();
+    this.appendStatementInput("stats")
+        .setCheck(null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['return'] = {
+  init: function() {
+    this.appendValueInput("returnVal")
+        .setCheck(null)
+        .appendField("return");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['func_call'] = {
+  init: function() {
+    this.appendValueInput("return")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("function Name"), "NAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['func_calls'] = {
+  init: function() {
+    this.appendValueInput("return")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("function Name"), "NAME");
+    this.setOutput(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
