@@ -1,11 +1,13 @@
 program meep;
-funcion cuentaHasta(int n) {
-  print(n);
-
-  if (n > 0) {
-    cuentaHasta(n - 1);
+funcion int cuenta (int n){
+  if (n>1) {
+    print(cuenta(n-1));
+  } else {
+    print(n);
   }
+
 }
-int main {
-  cuentaHasta(10);
+int main{
+  cuenta(10);
+
 }

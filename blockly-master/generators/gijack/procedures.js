@@ -185,7 +185,7 @@ Blockly.gijack['proc'] = function(block) {
   var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
   var statements_stats = Blockly.gijack.statementToCode(block, 'stats');
   // TODO: Assemble gijack into code variable.
-  var code = dropdown_tipo + ' ' + text_nombre + ' (' +value_name + '){\n' + statements_stats + '\n}';
+  var code = 'funcion ' + dropdown_tipo + ' ' + text_nombre + ' (' +value_name + '){\n' + statements_stats + '\n}';
   return code;
 };
 
