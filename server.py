@@ -6,6 +6,7 @@ from parser.tabla import Tabla
 from parser.programa import Programa
 from parser.gijackLexer import gijackLexer
 from parser.gijackParser import gijackParser
+from vm.meep import Meep
 from antlr4 import *
 
 app = Flask(__name__)
@@ -27,10 +28,21 @@ def compile():
         stream = CommonTokenStream(lexer)
         parser = Funk(stream, tabla, programa1)
 
+       
+
+        meep = Meep()
+        
+        meep.while_my_guitar_gently_meeps()
+
         try:
             tree = parser.start()
         except Exception as e:
             errors = str(e)
+
+        programa1.dump()
+        programa1.escribo('tmp.jack')
+        meep.read_meeps('tmp.jack')
+        meep.while_my_guitar_gently_meeps()
 
         prog = "<br />".join(programa1.line_dump())
 
