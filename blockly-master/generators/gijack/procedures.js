@@ -126,4 +126,37 @@ Blockly.gijack['procedures_express'] = function(block) {
   return code;
 };
 
+Blockly.gijack['proced_exp'] = function(block) {
+  var value_expression = Blockly.gijack.valueToCode(block, 'expression', Blockly.gijack.ORDER_ATOMIC);
+  var argument1 = Blockly.gijack.valueToCode(block, 'expression',
+    Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  // TODO: Assemble gijack into code variable.
+  var code = '('+argument1+')';
+  return code;
+};
 
+Blockly.gijack['create_main'] = function(block) {
+  var value_expression = Blockly.gijack.valueToCode(block, 'expression', Blockly.gijack.ORDER_ATOMIC);
+  var argument0 = Blockly.gijack.valueToCode(block, 'expression',
+    Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  // TODO: Assemble gijack into code variable.
+  var code = 'int main{' + '\n' + argument0 + '\n' + '}';
+  return code;
+};
+
+Blockly.gijack['procedures_main2'] = function(block) {
+  var statements_name = Blockly.gijack.statementToCode(block, 'NAME');
+  statements_name = Blockly.gijack.addLoopTrap(statements_name, block.id);
+  // TODO: Assemble gijack into code variable.
+  var code = 'int main{' + '\n' + statements_name + '\n' + '}';
+  return code;
+};
+
+Blockly.gijack['pro_exp'] = function(block) {
+  var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
+  var argument0 = Blockly.gijack.valueToCode(block, 'NAME',
+    Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  // TODO: Assemble gijack into code variable.
+  var code = '('+argument0+')';
+  return code;
+};

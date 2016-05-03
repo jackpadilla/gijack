@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import sys
+<<<<<<< Updated upstream
 from flask import Flask, render_template, request
+=======
+from flask import Flask, render_template, url_for
+>>>>>>> Stashed changes
 from parser.funk import Funk
 from parser.tabla import Tabla
 from parser.programa import Programa

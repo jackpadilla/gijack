@@ -323,5 +323,40 @@ Blockly.gijack['lists_split'] = function(block) {
   return [code, Blockly.gijack.ORDER_FUNCTION_CALL];
 };
 
+Blockly.gijack['lists_create'] = function(block) {
+  var dropdown_type = block.getFieldValue('type');
+  var text_listname = block.getFieldValue('ListName');
+  var text_listsize = block.getFieldValue('ListSize');
+  // TODO: Assemble gijack into code variable.
+  var code = dropdown_type + ' ' + text_listname+ ' [' + text_listsize + '];\n';
+  return code;
+};
 
-//
+
+Blockly.gijack['lists_assign'] = function(block) {
+  var text_listname = block.getFieldValue('listname');
+  var value_value = Blockly.gijack.valueToCode(block, 'value', Blockly.gijack.ORDER_ATOMIC);
+  var argument0 = Blockly.gijack.valueToCode(block, 'value',
+      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  var statements_expression = Blockly.gijack.statementToCode(block, 'expression');
+  statements_expression  = Blockly.gijack.addLoopTrap(statements_expression, block.id);
+  // TODO: Assemble gijack into code variable.
+  var code = text_listname + ' [' + statements_expression + ']' + ' = ' + argument0 + '\n'; 
+
+  return code;
+};
+
+
+Blockly.gijack['lists_assign2'] = function(block) {
+  var text_listname = block.getFieldValue('listname');
+  var value_value = Blockly.gijack.valueToCode(block, 'value', Blockly.gijack.ORDER_ATOMIC);
+  var argument0 = Blockly.gijack.valueToCode(block, 'value',
+      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL'; 
+  var value_expression = Blockly.gijack.valueToCode(block, 'expression', Blockly.gijack.ORDER_ATOMIC);
+  var argument1 = Blockly.gijack.valueToCode(block, 'expression',
+      Blockly.gijack.ORDER_ASSIGNMENT) || 'NULL';
+  // TODO: Assemble gijack into code variable.
+  var code = text_listname + ' [' + argument1 + ']' + ' = ' + argument0 + '\n'; 
+
+  return code;
+};
