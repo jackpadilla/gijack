@@ -40,7 +40,7 @@ Blockly.gijack['math_arithmetic'] = function(block) {
   var OPERATORS = {
     'ADD': [' + ', Blockly.gijack.ORDER_ADDITION],
     'MINUS': [' - ', Blockly.gijack.ORDER_SUBTRACTION],
-    'MULTIPLY': [' x ', Blockly.gijack.ORDER_MULTIPLICATION],
+    'MULTIPLY': [' * ', Blockly.gijack.ORDER_MULTIPLICATION],
     'DIVIDE': [' / ', Blockly.gijack.ORDER_DIVISION],
     //'POWER': [null, Blockly.gijack.ORDER_COMMA]  // Handle power separately.
   };

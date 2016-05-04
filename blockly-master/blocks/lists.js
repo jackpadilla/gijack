@@ -302,20 +302,18 @@ Blockly.Blocks['lists_assign2'] = {
   }
 };
 
-Blockly.Blocks['lista_dec'] = {
+Blockly.Blocks['list_dec'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["int", "OPTIONNAME"], ["float", "OPTIONNAME"], ["bool", "OPTIONNAME"], ["string", "OPTIONNAME"]]), "tipo")
-        .appendField(new Blockly.FieldTextInput("id"), "id");
-    this.appendValueInput("NAME")
+    this.appendValueInput("tamaño")
         .setCheck("Number")
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["float", "float"], ["bool", "bool"], ["string", "string"]]), "tipo")
+        .appendField(new Blockly.FieldTextInput("default"), "nombre")
         .appendField("[");
     this.appendDummyInput()
-        .appendField("];");
-    this.setInputsInline(true);
+        .appendField("] ;");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(65);
+    this.setColour(20);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
