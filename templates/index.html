@@ -156,7 +156,7 @@ function compile() {
         }
       }
   };
-  xhr.send('code=' + document.getElementById('textarea').value);
+  xhr.send('code='+encodeURIComponent(document.getElementById('textarea').value));
   addLine('Compiling...', 'compile');
 }
 
