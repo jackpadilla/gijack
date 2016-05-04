@@ -256,15 +256,6 @@ class gijackListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by gijackParser#vdim.
-    def enterVdim(self, ctx):
-        pass
-
-    # Exit a parse tree produced by gijackParser#vdim.
-    def exitVdim(self, ctx):
-        pass
-
-
     # Enter a parse tree produced by gijackParser#vdimAux.
     def enterVdimAux(self, ctx):
         pass

@@ -10,6 +10,7 @@ class Tabla():
             'string':0
         }
         self.contexto = ""
+        self.arreglos = {}
 
     def buscar_variable(self, nombre):
         try:
@@ -112,8 +113,28 @@ class Tabla():
     def agregar_parametro(self,parametro):
         self.funciones[self.contexto]["parametros"].append(parametro)
 
+    def agregar_arreglo(self, nombre, tipo, tam):
+        for i in range(tam):
+            nom = "%s___%d" % (nombre, i)
+            var = self.agregar_variable(nom, tipo)
+
+            if i == 0:
+                primer_id = var['id']
+
+        self.arreglos[nombre] = {
+            'tipo': tipo,
+            'tamano': tam,
+            'empieza': primer_id
+        }
+
     def obtener_parametro(self,contador,contexto):
         if contador >= len(self.funciones[contexto]["parametros"]):
             raise Exception("Cantidad incorrecta de argumentos")
 
         return self.funciones[contexto]["parametros"][contador]
+
+    def buscar_arreglo(self, nombre):
+        try:
+            return self.arreglos[nombre]
+        except KeyError:
+            raise Exception('Arreglo no declarada %s' % nombre)

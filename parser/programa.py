@@ -313,3 +313,34 @@ class Programa:
 
     def add_var(self, id):
         self.varIds.append(id)
+
+    def agregar_arreglo(self, nombre, tipo, tam):
+        tama = int(tam)
+        self.tabla.agregar_arreglo(nombre, tipo, tama)
+
+    def asignar_arreglo(self, nombre):
+        var1 = self.varIds.pop()
+        var2 = self.varIds.pop()
+        var = self.tabla.buscar_variable(var2)
+        index = self.tabla.buscar_variable(var1)
+        arreglo = self.tabla.buscar_arreglo(nombre)
+
+        if index['tipo'] != 'int':
+            raise Exception('El acceso a un arreglo solo puede ser con un valor entero')
+
+        cuad = Cuadruplo('arrass', var['id'], index['id'], arreglo['empieza'])
+        self.estatutos.append(cuad)
+
+    def accesar_arreglo(self, nombre):
+        varid = self.varIds.pop()
+        index = self.tabla.buscar_variable(varid)
+        arreglo = self.tabla.buscar_arreglo(nombre)
+
+        if index['tipo'] != 'int':
+            raise Exception('El acceso a un arreglo solo puede ser con un valor entero')
+
+        temporal = self.tabla.agregar_temporal(arreglo['tipo'])
+        self.varIds.append(temporal['nombre'])
+
+        cuad = Cuadruplo('arracc', arreglo['empieza'], index['id'], temporal['id'])
+        self.estatutos.append(cuad)

@@ -1,18 +1,16 @@
 program meep;
 int main{
-  int i = 0;
-  for(i = 0; 1<10;i=i+1;) {
-    print(i);
+  int meep[10];
+  int i;
 
-   }
-  while (i>0) {
-    print(i);
-    i = i-1;
+  for (i = 0; i < 10; i = i + 1;)
+  {
+    meep[i] = i;
   }
-  do {
-    print(i);
-    i = i-1;
+
+  for (i = 0; i < 10; i = i + 1;)
+  {
+    print(meep[i]);
   }
-  while (i<10);
 
 }

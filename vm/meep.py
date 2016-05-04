@@ -135,6 +135,12 @@ class Meep:
         elif instruccion == 'read':
             self.leer(direccion1,resultado)
 
+        elif instruccion == 'arrass':
+            self.arr_ass(direccion1, direccion2, resultado)
+
+        elif instruccion == 'arracc':
+            self.arr_acc(direccion1, direccion2, resultado)
+
         elif instruccion == 'debug':
             self.debug()
 
@@ -268,3 +274,19 @@ class Meep:
                 print self.memoria.dump()
             else:
                 pass
+
+    def arr_ass(self, direccion, index, empieza):
+        i = self.memoria.obtenerVariable(index)
+        valor = self.memoria.obtenerVariable(direccion)
+
+        tipo = empieza[0]
+        res = "%s%d" % (tipo, int(empieza[1:]) + i)
+
+        self.memoria.ponerValor(res, valor)
+
+    def arr_acc(self, empieza, index, res):
+        i = self.memoria.obtenerVariable(index)
+        tipo = empieza[0]
+        ubi = "%s%d" % (tipo, int(empieza[1:]) + i)
+        valor = self.memoria.obtenerVariable(ubi)
+        self.memoria.ponerValor(res, valor)

@@ -28,7 +28,10 @@ debug: 'debug' PAREN_LEFT PAREN_RIGHT DELIMITER {self.programa2.debug()};
 
 lista: expresion;
 
-asignacion: (varId=simple_id|varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT) ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)};
+asignacion
+  : varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT ASSIGN_OP expresion DELIMITER {self.programa2.asignar_arreglo($varId.text)}
+  | varId=simple_id ASSIGN_OP expresion DELIMITER {self.programa2.asignacion($varId.text)}
+  ;
 
 forLoop:forAux forAux2 forAux3 CURLY_BRACKET_LEFT procesos CURLY_BRACKET_RIGHT{self.programa2.vez()};
 
@@ -65,15 +68,11 @@ elseifCond: elseAux ifCond {self.programa2.comprender()};
 variable
   : varTipo=tipo varId=simple_id DELIMITER {self.tabla.agregar_variable($varId.text, $varTipo.text)}
   | varTipo=tipo varId=simple_id ASSIGN_OP expresion DELIMITER {self.tabla.agregar_variable($varId.text, $varTipo.text)}
-  | vdim DELIMITER
+  | varTipo=tipo varId=vdimAux SQUARE_BRACKET_LEFT tam=INT SQUARE_BRACKET_RIGHT DELIMITER {self.programa2.agregar_arreglo($varId.text,$varTipo.text,$tam.text)}
   ;
 
 simple_id returns [String varId]
   : var=ID {$varId=$var.text}
-  ;
-
-vdim
-  : varTipo=tipo varId=vdimAux SQUARE_BRACKET_LEFT INT SQUARE_BRACKET_RIGHT {self.tabla.agregar_variable($varId.text, $varTipo.text)}
   ;
 
 vdimAux returns [String varId]
@@ -147,7 +146,7 @@ fact
 f
   : varId=const {self.programa2.add_var($varId.text)}
   | varId=simple_id {self.programa2.add_var($varId.text)}
-  | varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.programa2.add_var($varId.text)}
+  | varId=vdimAux SQUARE_BRACKET_LEFT lista SQUARE_BRACKET_RIGHT {self.programa2.accesar_arreglo($varId.text)}
   | func_call
   ;
 
