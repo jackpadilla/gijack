@@ -360,3 +360,22 @@ Blockly.gijack['lists_assign2'] = function(block) {
 
   return code;
 };
+
+
+Blockly.gijack['lista_dec'] = function(block) {
+  var dropdown_tipo = block.getFieldValue('tipo');
+  var text_id = block.getFieldValue('id');
+  var value_name = Blockly.gijack.valueToCode(block, 'NAME', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_tipo+' '+text_id+'['+value_name+'];\n';
+  return code;
+};
+
+Blockly.gijack['lista_asig'] = function(block) {
+  var text_id = block.getFieldValue('id');
+  var text_expresion = block.getFieldValue('expresion');
+  var value_valor = Blockly.gijack.valueToCode(block, 'valor', Blockly.gijack.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = text_id+'['+text_expresion+']='+value_valor+';\n';
+  return code;
+};

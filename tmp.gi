@@ -1,24 +1,8 @@
 program meep;
-funcion int fibo (int n){
-  if (n < 2) {
-    return 1;
-  } else {
-    int n1;
-    int n2;
-    n1 = fibo(n - 1);
-    n2 = fibo(n - 2);
-    return n1   n2;
-  }
-
-}
 int main{
-  int res;
-  int n;
-  for(n = 0; n<=10;n=n 1;) {
-    res = fibo(n);
-    print("respuesta");
-    print(res);
-
-   }
+  int x;
+  int y;
+  read("hola",x);y = x   5;
+  print(y);
 
 }

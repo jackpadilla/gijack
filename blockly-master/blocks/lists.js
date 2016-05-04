@@ -301,3 +301,41 @@ Blockly.Blocks['lists_assign2'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['lista_dec'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["int", "OPTIONNAME"], ["float", "OPTIONNAME"], ["bool", "OPTIONNAME"], ["string", "OPTIONNAME"]]), "tipo")
+        .appendField(new Blockly.FieldTextInput("id"), "id");
+    this.appendValueInput("NAME")
+        .setCheck("Number")
+        .appendField("[");
+    this.appendDummyInput()
+        .appendField("];");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['lista_asig'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("id"), "id")
+        .appendField("[")
+        .appendField(new Blockly.FieldTextInput("expresion"), "expresion");
+    this.appendDummyInput()
+        .appendField("]=");
+    this.appendValueInput("valor")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
