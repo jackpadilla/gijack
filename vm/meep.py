@@ -7,6 +7,7 @@ class Meep:
         self.contador = 0
         self.memoria = ManejadorMemoria()
         self.cont2=[]
+        self.prints = []
 
     def read_meeps(self, filename):
         with open(filename, "r+") as archivo:
@@ -27,11 +28,32 @@ class Meep:
 
         self.memoria.primer_mem()
 
-    def while_my_guitar_gently_meeps(self):
-        while self.contador < len(self.estatutos):
-            self.im_meeping()
+    def read_meeps_from_lines(self, lineas):
+        for linea in lineas:
+            estatuto=linea.strip().split(" ")
+            if estatuto[0] == "gen":
+                self.memoria.agregar_detalle(estatuto[1], estatuto[2])
+            elif estatuto[0] == "const":
+                if estatuto[1] == "string":
+                    valor = re.search(r'\".*\"', linea).group()
+                    self.memoria.crearConstante(estatuto[1],valor,estatuto[2])
+                else:
+                    self.memoria.crearConstante(estatuto[1],estatuto[3],estatuto[2])
+            elif estatuto[0] == "func":
+                self.memoria.crearFuncion(estatuto[1], estatuto[2])
+            else:
+                self.estatutos.append(estatuto)
 
-    def im_meeping(self):
+        self.memoria.primer_mem()
+
+    def while_my_guitar_gently_meeps(self, print_to_term=True):
+        while self.contador < len(self.estatutos):
+            self.im_meeping(print_to_term)
+
+        if not print_to_term:
+            return self.prints
+
+    def im_meeping(self, print_to_term):
         estatuto = self.estatutos[self.contador]
         instruccion = estatuto[0]
         direccion1 = estatuto[1]
@@ -39,7 +61,7 @@ class Meep:
         resultado = estatuto[3]
 
         if instruccion == 'print':
-            self.imprimir(direccion1)
+            self.imprimir(direccion1, print_to_term)
 
         elif instruccion == '+':
             self.sumar(direccion1,direccion2,resultado)
@@ -118,9 +140,13 @@ class Meep:
 
         self.contador += 1
 
-    def imprimir(self, direccion):
+    def imprimir(self, direccion, print_to_term):
         valor = self.memoria.obtenerVariable(direccion)
-        print valor,
+
+        if print_to_term:
+            print valor
+        else:
+            self.prints.append(valor)
 
     def sumar(self,dir1,dir2,res):
         valor = self.memoria.obtenerVariable(dir1) + self.memoria.obtenerVariable(dir2)

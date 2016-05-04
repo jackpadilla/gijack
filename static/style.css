@@ -51,3 +51,30 @@ html, body {
 #blocklyDiv {
   height: 100%;
 }
+
+.compile {
+  color: #999;
+}
+
+.error {
+  color: #f00;
+}
+
+.print {
+  color: #fff;
+}
+
+.term {
+  height: 40%;
+  background-color: #000;
+  border: 5px solid #ccc;
+  overflow-y: auto;
+}
+
+.term li {
+  list-style-type: none;
+}
+
+.code {
+  height: 60%;
+}

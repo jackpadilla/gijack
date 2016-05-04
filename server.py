@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from parser.funk import Funk
 from parser.tabla import Tabla
 from parser.programa import Programa
@@ -18,35 +18,39 @@ def index():
 @app.route("/compile", methods=['POST'])
 def compile():
     if request.method == 'POST':
+        errors = []
+        prints = []
+
         with open('tmp.gi', 'w') as f:
             f.write(request.form['code'])
 
-        inputfile = FileStream('tmp.gi')
         tabla = Tabla()
-        programa1 = Programa(tabla, "meep")
+        prog = Programa(tabla, "meep")
+        inputfile = FileStream('tmp.gi')
         lexer = gijackLexer(inputfile)
         stream = CommonTokenStream(lexer)
-        parser = Funk(stream, tabla, programa1)
-
-       
-
-        meep = Meep()
-        
-        meep.while_my_guitar_gently_meeps()
+        parser = Funk(stream, tabla, prog)
 
         try:
             tree = parser.start()
         except Exception as e:
-            errors = str(e)
+            errors = [str(e)]
 
-        programa1.dump()
-        programa1.escribo('tmp.jack')
-        meep.read_meeps('tmp.jack')
-        meep.while_my_guitar_gently_meeps()
+        if not errors:
+            meep = Meep()
+            meep.read_meeps_from_lines(prog.line_dump())
 
-        prog = "<br />".join(programa1.line_dump())
+            try:
+                prints = meep.while_my_guitar_gently_meeps(False)
+            except Exception as e:
+                errors = [str(e)]
 
-        return prog
+        response = {
+            'errors': errors,
+            'prints': prints
+        }
+
+        return jsonify(**response)
     else:
         redirect('/')
 
