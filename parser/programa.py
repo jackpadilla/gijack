@@ -319,8 +319,9 @@ class Programa:
         self.tabla.agregar_arreglo(nombre, tipo, tama)
 
     def asignar_arreglo(self, nombre):
-        var1 = self.varIds.pop()
         var2 = self.varIds.pop()
+        var1 = self.varIds.pop()
+        
         var = self.tabla.buscar_variable(var2)
         index = self.tabla.buscar_variable(var1)
         arreglo = self.tabla.buscar_arreglo(nombre)
