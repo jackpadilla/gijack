@@ -18,7 +18,7 @@ funcion int fibo(int n) {
 int main {
   int respuesta;
   int n;
-  for(n = 1; n <= 5; n = n+1;)
+  for(n = 1; n <= 10; n = n+1;)
   {
     respuesta = fibo(n);
     print("respuesta: ");

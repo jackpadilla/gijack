@@ -68,3 +68,11 @@ Blockly.gijack['varis_item'] = function(block) {
   var code = text_item;
   return code;
 };
+
+Blockly.gijack['var_dec'] = function(block) {
+  var dropdown_opcion = block.getFieldValue('opcion');
+  var text_variable = block.getFieldValue('variable');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_opcion +' '+ text_variable +';\n';
+  return code;
+};

@@ -155,4 +155,20 @@ Blockly.Blocks['varis_item'] = {
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
+
+};
+
+Blockly.Blocks['var_dec'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["bool", "bool"], ["float", "float"], ["string", "string"]]), "opcion")
+        .appendField(new Blockly.FieldTextInput("variable"), "variable")
+        .appendField(";");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
 };
